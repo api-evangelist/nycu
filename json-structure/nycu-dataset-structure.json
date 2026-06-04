@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/json-structure/nycu-dataset-structure.json",
+  "name": "NYCUDataverseDataset",
+  "description": "JSON Structure for a research dataset in the NYCU Dataverse repository (Dataverse v5.10.1 Native API).",
+  "type": "object",
+  "properties": {
+    "id": { "type": "int64", "description": "Internal numeric dataset identifier." },
+    "persistentId": { "type": "string", "description": "Persistent global identifier (DOI)." },
+    "protocol": { "type": "string", "description": "Persistent-identifier protocol." },
+    "authority": { "type": "string", "description": "Persistent-identifier authority/prefix." },
+    "identifier": { "type": "string", "description": "Persistent-identifier shoulder/identifier." },
+    "publisher": { "type": "string", "description": "Owning Dataverse collection / publisher." },
+    "publicationDate": { "type": "string", "description": "Publication date of the dataset version." },
+    "storageIdentifier": { "type": "string", "description": "Backend storage identifier." },
+    "fileAccessRequest": { "type": "boolean", "description": "Whether restricted files may be requested." },
+    "useGenericThumbnail": { "type": "boolean", "description": "Whether a generic thumbnail is used." },
+    "files": {
+      "type": "array",
+      "description": "Data files belonging to the dataset.",
+      "items": { "type": { "$ref": "#/definitions/DataFile" } }
+    }
+  },
+  "required": ["id"],
+  "definitions": {
+    "DataFile": {
+      "type": "object",
+      "description": "A data file within a dataset.",
+      "properties": {
+        "id": { "type": "int64" },
+        "contentType": { "type": "string", "description": "MIME type." },
+        "filename": { "type": "string" },
+        "filesize": { "type": "int64", "description": "File size in bytes." },
+        "restricted": { "type": "boolean", "description": "Whether access is restricted." },
+        "checksumType": { "type": "string", "description": "Checksum algorithm." },
+        "checksumValue": { "type": "string", "description": "Checksum value." },
+        "storageIdentifier": { "type": "string" }
+      },
+      "required": ["id"]
+    }
+  }
+}

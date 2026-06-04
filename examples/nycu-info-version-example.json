@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://dataverse.lib.nycu.edu.tw/api/info/version"
+  },
+  "response": {
+    "status": "OK",
+    "data": {
+      "version": "5.10.1",
+      "build": "heads/v5.10.1-b84467267"
+    }
+  }
+}

@@ -59,6 +59,20 @@ apis:
     properties:
       - type: Documentation
         url: https://guides.dataverse.org/en/5.10.1/api/
+      - type: OpenAPI
+        url: openapi/nycu-dataverse.yaml
+      - type: JSONSchema
+        url: json-schema/nycu-dataset-schema.json
+      - type: JSONStructure
+        url: json-structure/nycu-dataset-structure.json
+      - type: Examples
+        url: examples/nycu-search-example.json
+      - type: Rules
+        url: rules/nycu-rules.yml
+      - type: Vocabulary
+        url: vocabulary/nycu-vocabulary.yml
+      - type: JSONLD
+        url: json-ld/nycu-context.jsonld
   - aid: nycu:oai-pmh
     name: NYCU Dataverse OAI-PMH Endpoint
     description: >-

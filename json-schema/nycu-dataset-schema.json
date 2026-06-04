@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/json-schema/nycu-dataset-schema.json",
+  "title": "NYCU Dataverse Dataset",
+  "description": "A published research dataset in the NYCU Dataverse repository, as returned by the Dataverse Native API (e.g. GET /api/datasets/{id}). Fields mirror the Dataverse v5.10.1 Dataset object.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal numeric database identifier for the dataset."
+    },
+    "persistentId": {
+      "type": "string",
+      "description": "Persistent global identifier (typically a DOI) for the dataset.",
+      "examples": ["doi:10.57770/ABCDEF"]
+    },
+    "protocol": {
+      "type": "string",
+      "description": "Persistent-identifier protocol, e.g. 'doi' or 'hdl'."
+    },
+    "authority": {
+      "type": "string",
+      "description": "Persistent-identifier authority/prefix."
+    },
+    "identifier": {
+      "type": "string",
+      "description": "Persistent-identifier shoulder/identifier portion."
+    },
+    "publisher": {
+      "type": "string",
+      "description": "Publishing organization, typically the owning Dataverse collection."
+    },
+    "publicationDate": {
+      "type": "string",
+      "description": "Date the dataset version was published."
+    },
+    "storageIdentifier": {
+      "type": "string",
+      "description": "Backend storage identifier for the dataset."
+    },
+    "fileAccessRequest": {
+      "type": "boolean",
+      "description": "Whether restricted files may be requested by authenticated users."
+    },
+    "useGenericThumbnail": {
+      "type": "boolean",
+      "description": "Whether a generic placeholder thumbnail is used."
+    },
+    "files": {
+      "type": "array",
+      "description": "Data files belonging to the dataset.",
+      "items": { "$ref": "#/$defs/DataFile" }
+    }
+  },
+  "required": ["id"],
+  "additionalProperties": true,
+  "$defs": {
+    "DataFile": {
+      "type": "object",
+      "description": "A data file within a Dataverse dataset.",
+      "properties": {
+        "id": { "type": "integer" },
+        "contentType": { "type": "string", "description": "MIME type of the file." },
+        "filename": { "type": "string" },
+        "filesize": { "type": "integer", "description": "File size in bytes." },
+        "restricted": { "type": "boolean", "description": "Whether access to the file is restricted." },
+        "checksumType": { "type": "string", "description": "Checksum algorithm, e.g. MD5 or SHA-256." },
+        "checksumValue": { "type": "string", "description": "Computed checksum value." },
+        "storageIdentifier": { "type": "string" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

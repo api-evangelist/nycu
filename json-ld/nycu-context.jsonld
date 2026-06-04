@@ -1,0 +1,65 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "nycu": "https://dataverse.lib.nycu.edu.tw/vocab#",
+    "@vocab": "https://dataverse.lib.nycu.edu.tw/vocab#",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+
+    "institution": {
+      "@id": "schema:CollegeOrUniversity",
+      "@type": "@id"
+    },
+    "NYCU": {
+      "@type": "schema:CollegeOrUniversity",
+      "@id": "https://www.nycu.edu.tw/"
+    },
+
+    "Dataverse": "nycu:Dataverse",
+    "Dataset": {
+      "@id": "schema:Dataset"
+    },
+    "DataFile": {
+      "@id": "schema:DataDownload"
+    },
+
+    "persistentId": "schema:identifier",
+    "global_id": "schema:identifier",
+    "publisher": {
+      "@id": "schema:publisher",
+      "@type": "schema:Organization"
+    },
+    "publicationDate": {
+      "@id": "schema:datePublished",
+      "@type": "schema:Date"
+    },
+    "published_at": {
+      "@id": "schema:datePublished",
+      "@type": "schema:DateTime"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "schema:DateTime"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "schema:DateTime"
+    },
+    "subjects": "schema:about",
+    "contentType": "schema:encodingFormat",
+    "filesize": {
+      "@id": "schema:contentSize",
+      "@type": "schema:Integer"
+    },
+    "checksumValue": "schema:sha256",
+    "contacts": "schema:contactPoint",
+    "files": "schema:distribution",
+    "total_count": {
+      "@id": "schema:totalItems",
+      "@type": "schema:Integer"
+    },
+    "items": "schema:itemListElement"
+  }
+}

@@ -1,0 +1,56 @@
+vocabulary:
+  name: NYCU Dataverse API Vocabulary
+  description: >-
+    Controlled vocabulary for the core terms exposed by the National Yang Ming Chiao Tung
+    University (NYCU) Dataverse research-data repository APIs (Dataverse Project v5.10.1):
+    the Native API, the Search API and the OAI-PMH harvesting endpoint.
+  version: "5.10.1"
+  terms:
+    - term: Dataverse
+      definition: >-
+        A container (collection) that holds datasets and/or other dataverses; the
+        organizing unit of a Dataverse repository.
+      tags: [ object, collection ]
+    - term: Dataset
+      definition: >-
+        A research dataset consisting of cataloging metadata plus one or more data files,
+        identified by a persistent identifier (DOI).
+      tags: [ object, research-data ]
+    - term: DataFile
+      definition: >-
+        An individual file (data, documentation, code) belonging to a dataset, with a
+        content type, size and checksum.
+      tags: [ object, file ]
+    - term: PersistentId
+      definition: >-
+        A globally unique, stable identifier (typically a DOI) assigned to a dataset or
+        file for citation and retrieval.
+      tags: [ identifier ]
+    - term: NativeAPI
+      definition: >-
+        The Dataverse REST API for creating, reading, updating and managing dataverses,
+        datasets and files (paths under /api/v1).
+      tags: [ api ]
+    - term: SearchAPI
+      definition: >-
+        The Dataverse REST endpoint (GET /api/v1/search) for full-text discovery of
+        dataverses, datasets and files.
+      tags: [ api, search ]
+    - term: OAI-PMH
+      definition: >-
+        Open Archives Initiative Protocol for Metadata Harvesting; the standard harvesting
+        endpoint (/oai) exposing dataset metadata.
+      tags: [ api, metadata, harvesting ]
+    - term: MetadataBlock
+      definition: >-
+        A named group of dataset metadata fields (e.g. citation, geospatial) used to
+        describe and validate dataset cataloging metadata.
+      tags: [ metadata ]
+    - term: VersionState
+      definition: >-
+        The lifecycle state of a dataset version, such as DRAFT or RELEASED.
+      tags: [ lifecycle ]
+    - term: Checksum
+      definition: >-
+        A fixity value (e.g. MD5 or SHA-256) computed over a data file to verify integrity.
+      tags: [ file, integrity ]

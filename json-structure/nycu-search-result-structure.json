@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/json-structure/nycu-search-result-structure.json",
+  "name": "NYCUDataverseSearchResponse",
+  "description": "JSON Structure for the NYCU Dataverse Search API response envelope (GET /api/search).",
+  "type": "object",
+  "properties": {
+    "status": { "type": "string", "description": "Request status, 'OK' on success." },
+    "data": {
+      "type": "object",
+      "properties": {
+        "q": { "type": "string", "description": "Executed query." },
+        "total_count": { "type": "int64", "description": "Total number of matching results." },
+        "start": { "type": "int64", "description": "Offset of the first returned item." },
+        "count_in_response": { "type": "int64", "description": "Number of items in this page." },
+        "items": {
+          "type": "array",
+          "items": { "type": { "$ref": "#/definitions/SearchItem" } }
+        }
+      },
+      "required": ["total_count", "items"]
+    }
+  },
+  "required": ["status", "data"],
+  "definitions": {
+    "SearchItem": {
+      "type": "object",
+      "description": "A single search hit (dataverse, dataset, or file).",
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string", "description": "Result type: dataverse, dataset, or file." },
+        "url": { "type": "string", "description": "Canonical URL of the item." },
+        "global_id": { "type": "string", "description": "Persistent identifier (DOI) for datasets." },
+        "description": { "type": "string" },
+        "published_at": { "type": "string", "description": "Publication timestamp." }
+      },
+      "required": ["type"]
+    }
+  }
+}

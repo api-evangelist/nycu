@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/json-schema/nycu-search-result-schema.json",
+  "title": "NYCU Dataverse Search Response",
+  "description": "Envelope returned by the NYCU Dataverse Search API (GET /api/search?q=...). Mirrors the Dataverse v5.10.1 search response shape.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Request status, 'OK' on success.",
+      "enum": ["OK", "ERROR"]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "q": { "type": "string", "description": "The query that was executed." },
+        "total_count": { "type": "integer", "description": "Total number of matching results." },
+        "start": { "type": "integer", "description": "Zero-based offset of the first returned item." },
+        "count_in_response": { "type": "integer", "description": "Number of items in this response page." },
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/SearchItem" }
+        }
+      },
+      "required": ["total_count", "items"],
+      "additionalProperties": true
+    }
+  },
+  "required": ["status", "data"],
+  "additionalProperties": true,
+  "$defs": {
+    "SearchItem": {
+      "type": "object",
+      "description": "A single search hit: a dataverse, dataset, or file.",
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["dataverse", "dataset", "file"] },
+        "url": { "type": "string", "format": "uri" },
+        "global_id": { "type": "string", "description": "Persistent identifier (DOI) for dataset items." },
+        "description": { "type": "string" },
+        "published_at": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

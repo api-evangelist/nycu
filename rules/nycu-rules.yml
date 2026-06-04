@@ -1,0 +1,51 @@
+extends: []
+formats:
+  - oas3
+documentationUrl: https://github.com/api-evangelist/nycu
+rules:
+  nycu-info-block:
+    description: API must declare a title, description and version.
+    severity: warn
+    given: $.info
+    then:
+      - field: title
+        function: truthy
+      - field: description
+        function: truthy
+      - field: version
+        function: truthy
+
+  nycu-server-is-public-https:
+    description: Servers should point at the public NYCU Dataverse host over HTTPS, not an internal container hostname.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://dataverse\\.lib\\.nycu\\.edu\\.tw"
+
+  nycu-paths-versioned:
+    description: Dataverse Native and Search API paths are versioned under /api/v1.
+    severity: info
+    given: $.paths
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: "^/api/v1/"
+
+  nycu-operation-has-operationid:
+    description: Every operation should carry an operationId for tooling and SDK generation.
+    severity: warn
+    given: $.paths[*][get,put,post,delete,patch]
+    then:
+      field: operationId
+      function: truthy
+
+  nycu-schemas-described:
+    description: Reusable component schemas should be objects with defined properties.
+    severity: info
+    given: $.components.schemas[*]
+    then:
+      field: type
+      function: truthy

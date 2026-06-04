@@ -1,0 +1,63 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://dataverse.lib.nycu.edu.tw/api/search?q=*&type=dataset&per_page=1"
+  },
+  "response": {
+    "status": "OK",
+    "data": {
+      "q": "*",
+      "total_count": 289,
+      "start": 0,
+      "spelling_alternatives": {},
+      "items": [
+        {
+          "name": "Facet-Dependent Electrical Conductivity Properties of Cu2O Crystals.",
+          "type": "dataset",
+          "url": "https://doi.org/10.57770/SYRSQ5",
+          "global_id": "doi:10.57770/SYRSQ5",
+          "description": "supporting information",
+          "published_at": "2023-01-04T06:35:06Z",
+          "publisher": "Chih-Shan Tan Dataverse",
+          "citationHtml": "Tan, Chih Shan, 2023, \"Facet-Dependent Electrical Conductivity Properties of Cu2O Crystals.\", <a href=\"https://doi.org/10.57770/SYRSQ5\" target=\"_blank\">https://doi.org/10.57770/SYRSQ5</a>, NYCU Dataverse, V1",
+          "identifier_of_dataverse": "ChihShanTan",
+          "name_of_dataverse": "Chih-Shan Tan Dataverse",
+          "citation": "Tan, Chih Shan, 2023, \"Facet-Dependent Electrical Conductivity Properties of Cu2O Crystals.\", https://doi.org/10.57770/SYRSQ5, NYCU Dataverse, V1",
+          "storageIdentifier": "file://10.57770/SYRSQ5",
+          "subjects": [
+            "Chemistry",
+            "Engineering"
+          ],
+          "fileCount": 1,
+          "versionId": 163,
+          "versionState": "RELEASED",
+          "majorVersion": 1,
+          "minorVersion": 0,
+          "createdAt": "2022-12-07T04:58:10Z",
+          "updatedAt": "2023-01-04T06:35:06Z",
+          "contacts": [
+            {
+              "name": "Tan, Chih Shan",
+              "affiliation": ""
+            }
+          ],
+          "publications": [
+            {
+              "citation": "Tan, C. S., Hsu, S. C., Ke, W. H., Chen, L. J., &amp; Huang, M. H. (2015). Facet-dependent electrical conductivity properties of Cu2O crystals. Nano letters, 15(3), 2155-2160.https://doi.org/10.1021/acs.nanolett.5b00150",
+              "url": "https://doi.org/10.1021/acs.nanolett.5b00150"
+            }
+          ],
+          "geographicCoverage": [
+            {
+              "country": ""
+            }
+          ],
+          "authors": [
+            "Tan, Chih Shan"
+          ]
+        }
+      ],
+      "count_in_response": 1
+    }
+  }
+}
