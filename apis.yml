@@ -1,0 +1,90 @@
+---
+aid: nycu
+name: National Yang Ming Chiao Tung University
+description: >-
+  National Yang Ming Chiao Tung University (NYCU) is a public research university in
+  Taiwan formed in 2021 from the merger of National Yang-Ming University and National
+  Chiao Tung University, and ranked #219 in the QS World University Rankings 2025. Its
+  public developer footprint centers on an OAuth 2.0 / single sign-on identity service
+  (id.nycu.edu.tw) for third-party application integration, and the NYCU Dataverse
+  research-data repository which exposes standard Dataverse REST APIs (Native and Search)
+  and an OAI-PMH metadata-harvesting endpoint. Most administrative, course, and portal
+  systems are gated behind institutional SSO rather than openly documented.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Taiwan
+  - Identity
+  - OAuth
+  - Research Data
+  - Open Data
+  - Library
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: nycu:oauth
+    name: NYCU OAuth / Single Sign-On API
+    description: >-
+      OAuth 2.0 (RFC 6749) authorization-code service for third-party applications to
+      authenticate NYCU users and retrieve consented user data (email/username via the
+      profile scope, name via the name scope, and enrollment/employment status via the
+      status scope). Apps register a client and redirect-URI whitelist before use.
+    humanURL: https://id.nycu.edu.tw/docs/
+    baseURL: https://id.nycu.edu.tw
+    tags: [ Identity, OAuth, Authentication, SSO ]
+    properties:
+      - type: Documentation
+        url: https://id.nycu.edu.tw/docs/
+      - type: SignUp
+        url: https://id.nycu.edu.tw/apply/app
+      - type: Authentication
+        url: https://id.nycu.edu.tw/o/authorize/
+  - aid: nycu:dataverse
+    name: NYCU Dataverse Repository API
+    description: >-
+      NYCU Dataverse (Dataverse Project v5.10.1) is the university's research-data
+      repository, established 2022. It exposes the standard Dataverse Native API and
+      Search API (e.g. /api/info/version, /api/search, dataset and dataverse endpoints)
+      for programmatic discovery and access to published datasets.
+    humanURL: https://guides.dataverse.org/en/5.10.1/api/
+    baseURL: https://dataverse.lib.nycu.edu.tw/api
+    tags: [ Research Data, Open Data, Repository, Dataverse ]
+    properties:
+      - type: Documentation
+        url: https://guides.dataverse.org/en/5.10.1/api/
+  - aid: nycu:oai-pmh
+    name: NYCU Dataverse OAI-PMH Endpoint
+    description: >-
+      OAI-PMH 2.0 metadata-harvesting endpoint ("NYCU Dataverse Dataverse OAI Archive")
+      for harvesting dataset metadata from the NYCU Dataverse research-data repository.
+    humanURL: https://guides.dataverse.org/en/5.10.1/admin/harvestserver.html
+    baseURL: https://dataverse.lib.nycu.edu.tw/oai
+    tags: [ OAI-PMH, Metadata, Harvesting, Research Data ]
+    properties:
+      - type: Documentation
+        url: https://guides.dataverse.org/en/5.10.1/admin/harvestserver.html
+common:
+  - type: Website
+    url: https://www.nycu.edu.tw/
+  - type: DeveloperPortal
+    url: https://id.nycu.edu.tw/docs/
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/nycu/
+  - type: Plans
+    url: plans/nycu-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/nycu-rate-limits.yml
+  - type: FinOps
+    url: finops/nycu-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

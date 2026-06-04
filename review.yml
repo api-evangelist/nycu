@@ -1,0 +1,48 @@
+---
+name: National Yang Ming Chiao Tung University
+description: National Yang Ming Chiao Tung University public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      Verified live: NYCU operates a documented OAuth 2.0 single sign-on developer
+      service at id.nycu.edu.tw with public docs and an app-registration flow, plus an
+      NYCU Dataverse research-data repository (Dataverse v5.10.1) exposing the standard
+      Native/Search REST APIs (api/info/version returns 200) and an OAI-PMH 2.0 endpoint
+      (verb=Identify returns the "NYCU Dataverse Dataverse OAI Archive"). No official
+      institution-wide GitHub org was found (only individual research-lab orgs such as
+      ARG-NCTU and NYCU-NLP-Lab); course/timetable/SIS and portal systems are gated
+      behind SSO and not openly documented. The institution website returns 403 to
+      automated clients and LinkedIn returns 999 (both standard bot-blocking, sites
+      exist). No fabricated endpoints; only confirmed URLs reported.
+    endpoints:
+      - url: https://id.nycu.edu.tw/docs/
+        status: 200
+        note: OAuth 2.0 developer documentation (live).
+      - url: https://id.nycu.edu.tw/o/authorize/
+        status: 200
+        note: OAuth authorization endpoint (live).
+      - url: https://dataverse.lib.nycu.edu.tw/
+        status: 200
+        note: NYCU Dataverse repository home, Dataverse v5.10.1.
+      - url: https://dataverse.lib.nycu.edu.tw/api/info/version
+        status: 200
+        note: Dataverse Native API returns {"status":"OK","data":{"version":"5.10.1"}}.
+      - url: https://dataverse.lib.nycu.edu.tw/oai?verb=Identify
+        status: 200
+        note: OAI-PMH 2.0 endpoint, "NYCU Dataverse Dataverse OAI Archive".
+      - url: https://rdm.lib.nycu.edu.tw/
+        status: 200
+        note: Library research-data-management support site (live).
+      - url: https://lib.nycu.edu.tw/
+        status: 200
+        note: University library site (live).
+      - url: https://www.nycu.edu.tw/
+        status: 403
+        note: Official website blocks automated clients; site exists.
+      - url: https://www.linkedin.com/school/nycu/
+        status: 999
+        note: LinkedIn school page; 999 is standard LinkedIn bot-block, page exists.
