@@ -85,6 +85,8 @@ apis:
       - type: Documentation
         url: https://guides.dataverse.org/en/5.10.1/admin/harvestserver.html
 common:
+  - type: DomainSecurity
+    url: security/nycu-domain-security.yml
   - type: Website
     url: https://www.nycu.edu.tw/
   - type: DeveloperPortal

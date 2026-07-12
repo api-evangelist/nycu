@@ -1,0 +1,32 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.nycu.edu.tw
+  https: true
+  tls_cert_error: '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Missing Subject
+    Key Identifier (_ssl.c:1082)'
+  hsts: null
+- host: id.nycu.edu.tw
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 24 13:31:58 2026 GMT
+  hsts: false
+- host: guides.dataverse.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jul 30 23:59:59 2026 GMT
+  hsts: false
+domains:
+- domain: nycu.edu.tw
+  dnssec: true
+  caa: []
+  spf: false
+  dmarc: true
+  dmarc_policy: none
+- domain: dataverse.org
+  dnssec: true
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
