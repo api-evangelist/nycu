@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  title: NYCU Dataverse Native & Search Access Batch API
+  description: OpenAPI description served by the National Yang Ming Chiao Tung University (NYCU) Dataverse research-data repository (Dataverse Project v5.10.1) at https://dataverse.lib.nycu.edu.tw. Captured unmodified from the live /openapi endpoint; only the servers and info blocks were adjusted to point at the public base URL.
+  version: 5.10.1
+servers:
+- url: https://dataverse.lib.nycu.edu.tw
+  description: NYCU Dataverse production instance.
+tags:
+- name: Batch
+paths:
+  /api/v1/batch/harvest:
+    get:
+      operationId: harvest
+      parameters:
+      - name: path
+        in: query
+        schema:
+          type: string
+      - name: dv
+        in: query
+        schema:
+          type: string
+      - name: createDV
+        in: query
+        schema:
+          type: boolean
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Batch
+  /api/v1/batch/import:
+    get:
+      operationId: getImport
+      parameters:
+      - name: path
+        in: query
+        schema:
+          type: string
+      - name: dv
+        in: query
+        schema:
+          type: string
+      - name: createDV
+        in: query
+        schema:
+          type: boolean
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Batch
+    post:
+      operationId: postImport
+      parameters:
+      - name: dv
+        in: query
+        schema:
+          type: string
+      - name: key
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Batch
+  /api/v1/batch/jobs/import/datasets/files/{identifier}:
+    post:
+      operationId: getFilesystemImport
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: mode
+        in: query
+        schema:
+          type: string
+          default: MERGE
+      - name: uploadFolder
+        in: query
+        schema:
+          type: string
+      - name: totalSize
+        in: query
+        schema:
+          type: number
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Batch

@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: NYCU Dataverse Native & Search Access Mydata API
+  description: OpenAPI description served by the National Yang Ming Chiao Tung University (NYCU) Dataverse research-data repository (Dataverse Project v5.10.1) at https://dataverse.lib.nycu.edu.tw. Captured unmodified from the live /openapi endpoint; only the servers and info blocks were adjusted to point at the public base URL.
+  version: 5.10.1
+servers:
+- url: https://dataverse.lib.nycu.edu.tw
+  description: NYCU Dataverse production instance.
+tags:
+- name: Mydata
+paths:
+  /api/v1/mydata/retrieve:
+    get:
+      operationId: retrieveMyDataAsJsonString
+      parameters:
+      - name: dvobject_types
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: published_states
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: selected_page
+        in: query
+        schema:
+          type: integer
+      - name: mydata_search_term
+        in: query
+        schema:
+          type: string
+      - name: role_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: number
+      - name: userIdentifier
+        in: query
+        schema:
+          type: string
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Default Response.
+      tags:
+      - Mydata

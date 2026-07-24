@@ -1,0 +1,159 @@
+openapi: 3.0.0
+info:
+  title: NYCU Dataverse Native & Search Access Users API
+  description: OpenAPI description served by the National Yang Ming Chiao Tung University (NYCU) Dataverse research-data repository (Dataverse Project v5.10.1) at https://dataverse.lib.nycu.edu.tw. Captured unmodified from the live /openapi endpoint; only the servers and info blocks were adjusted to point at the public base URL.
+  version: 5.10.1
+servers:
+- url: https://dataverse.lib.nycu.edu.tw
+  description: NYCU Dataverse production instance.
+tags:
+- name: Users
+paths:
+  /api/v1/users/:me:
+    get:
+      operationId: getAuthenticatedUserByToken
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/token:
+    get:
+      operationId: getTokenExpirationDate
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+    delete:
+      operationId: deleteToken
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/token/recreate:
+    post:
+      operationId: recreateToken
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/{consumedIdentifier}/mergeIntoUser/{baseIdentifier}:
+    post:
+      operationId: mergeInAuthenticatedUser
+      parameters:
+      - name: consumedIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: baseIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/{identifier}/changeIdentifier/{newIdentifier}:
+    post:
+      operationId: changeAuthenticatedUserIdentifier
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: newIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/{identifier}/removeRoles:
+    post:
+      operationId: removeUserRoles
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/{identifier}/traces:
+    get:
+      operationId: getTraces
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/{identifier}/traces/{element}:
+    get:
+      operationId: getTraces
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: element
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default Response.
+      tags:
+      - Users

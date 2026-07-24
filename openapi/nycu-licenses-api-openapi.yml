@@ -1,0 +1,2059 @@
+openapi: 3.0.0
+info:
+  title: NYCU Dataverse Native & Search Access Licenses API
+  description: OpenAPI description served by the National Yang Ming Chiao Tung University (NYCU) Dataverse research-data repository (Dataverse Project v5.10.1) at https://dataverse.lib.nycu.edu.tw. Captured unmodified from the live /openapi endpoint; only the servers and info blocks were adjusted to point at the public base URL.
+  version: 5.10.1
+servers:
+- url: https://dataverse.lib.nycu.edu.tw
+  description: NYCU Dataverse production instance.
+tags:
+- name: Licenses
+paths:
+  /api/v1/licenses:
+    get:
+      operationId: getLicenses
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Licenses
+    post:
+      operationId: addLicense
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/License'
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Licenses
+  /api/v1/licenses/default:
+    get:
+      operationId: getDefault
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Licenses
+  /api/v1/licenses/default/{id}:
+    put:
+      operationId: setDefault
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: number
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Licenses
+  /api/v1/licenses/{id}:
+    get:
+      operationId: getLicenseById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: number
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Licenses
+    delete:
+      operationId: deleteLicenseById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: number
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Licenses
+  /api/v1/licenses/{id}/:active/{activeState}:
+    put:
+      operationId: setActiveState
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: number
+      - name: activeState
+        in: path
+        required: true
+        schema:
+          type: boolean
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Licenses
+components:
+  schemas:
+    Reason:
+      enum:
+      - Ingest
+      - Workflow
+      - InReview
+      - DcmUpload
+      - finalizePublication
+      - EditInProgress
+      - FileValidationFailed
+    AlternativePersistentIdentifier:
+      type: object
+      properties:
+        id:
+          type: number
+        dvObject:
+          $ref: '#/components/schemas/DvObject'
+        protocol:
+          type: string
+        authority:
+          type: string
+        globalIdCreateTime: {}
+        identifier:
+          type: string
+        identifierRegistered:
+          type: boolean
+        storageLocationDesignator:
+          type: boolean
+    DvObject:
+      type: object
+      properties:
+        id:
+          type: number
+        owner: {}
+        publicationDate: {}
+        releaseUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        createDate: {}
+        modificationTime: {}
+        indexTime: {}
+        permissionModificationTime: {}
+        permissionIndexTime: {}
+        storageIdentifier:
+          type: string
+        dtype:
+          type: string
+        protocol:
+          type: string
+        authority:
+          type: string
+        globalIdCreateTime: {}
+        identifier:
+          type: string
+        identifierRegistered:
+          type: boolean
+        alternativePersistentIndentifiers:
+          items:
+            $ref: '#/components/schemas/AlternativePersistentIdentifier'
+        previewImageAvailable:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        roleAssignments:
+          items:
+            $ref: '#/components/schemas/RoleAssignment'
+        mergeable:
+          type: boolean
+      allOf:
+      - $ref: '#/components/schemas/DataverseEntity'
+      - $ref: '#/components/schemas/DataverseEntity'
+      - $ref: '#/components/schemas/DataverseEntity'
+      - $ref: '#/components/schemas/DataverseEntity'
+    Type:
+      enum:
+      - ASSIGNROLE
+      - REVOKEROLE
+      - CREATEDV
+      - CREATEDS
+      - CREATEACC
+      - SUBMITTEDDS
+      - RETURNEDDS
+      - PUBLISHEDDS
+      - REQUESTFILEACCESS
+      - GRANTFILEACCESS
+      - REJECTFILEACCESS
+      - FILESYSTEMIMPORT
+      - CHECKSUMIMPORT
+      - CHECKSUMFAIL
+      - CONFIRMEMAIL
+      - APIGENERATED
+      - INGESTCOMPLETED
+      - INGESTCOMPLETEDWITHERRORS
+      - PUBLISHFAILED_PIDREG
+      - WORKFLOW_SUCCESS
+      - WORKFLOW_FAILURE
+      - STATUSUPDATED
+      - DATASETCREATED
+    Embargo:
+      type: object
+      properties:
+        id:
+          type: number
+        dateAvailable:
+          type: object
+        reason:
+          type: string
+        dataFiles:
+          items:
+            $ref: '#/components/schemas/DataFile'
+    AuxiliaryFile:
+      type: object
+      properties:
+        id:
+          type: number
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        formatTag:
+          type: string
+        formatVersion:
+          type: string
+        origin:
+          type: string
+        isPublic:
+          type: boolean
+        contentType:
+          type: string
+        fileSize:
+          type: number
+        checksum:
+          type: string
+        type:
+          type: string
+    DatasetVersion:
+      type: object
+      properties:
+        id:
+          type: number
+        UNF:
+          type: string
+        version:
+          type: number
+        versionNumber:
+          type: number
+        minorVersionNumber:
+          type: number
+        versionNote:
+          type: string
+        versionState:
+          $ref: '#/components/schemas/VersionState'
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        fileMetadatas:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        termsOfUseAndAccess:
+          $ref: '#/components/schemas/TermsOfUseAndAccess'
+        datasetFields:
+          items:
+            $ref: '#/components/schemas/DatasetField'
+        createTime: {}
+        lastUpdateTime: {}
+        releaseTime: {}
+        archiveTime: {}
+        archiveNote:
+          type: string
+        archivalCopyLocation:
+          type: string
+        deaccessionLink:
+          type: string
+        contributorNames:
+          type: string
+        dataverseSiteUrl:
+          type: string
+        jsonLd:
+          type: string
+        datasetVersionUsers:
+          items:
+            $ref: '#/components/schemas/DatasetVersionUser'
+        workflowComments:
+          items:
+            $ref: '#/components/schemas/WorkflowComment'
+        externalStatusLabel:
+          type: string
+        dvd:
+          $ref: '#/components/schemas/DatasetVersionDifference'
+    ExternalToolType:
+      type: object
+      properties:
+        id:
+          type: number
+        type:
+          $ref: '#/components/schemas/Type'
+        externalTool:
+          $ref: '#/components/schemas/ExternalTool'
+    IngestRequest:
+      type: object
+      properties:
+        id:
+          type: number
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        textEncoding:
+          type: string
+        controlCard:
+          type: string
+        labelsFile:
+          type: string
+        forceTypeCheck:
+          type: boolean
+    DatasetVersionUser:
+      type: object
+      properties:
+        id:
+          type: number
+        authenticatedUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        datasetVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        lastUpdateDate: {}
+    FileDifferenceDetailItem:
+      type: object
+      properties:
+        displayName:
+          type: string
+        originalValue:
+          type: string
+        newValue:
+          type: string
+    SummaryStatistic:
+      type: object
+      properties:
+        id:
+          type: number
+        dataVariable:
+          $ref: '#/components/schemas/DataVariable'
+        type:
+          $ref: '#/components/schemas/SummaryStatisticType'
+        value:
+          type: string
+    DvObjectContainer:
+      type: object
+      properties:
+        storageDriver:
+          type: string
+        metadataLanguage:
+          type: string
+        externalLabelSetName:
+          type: string
+        id:
+          type: number
+        owner: {}
+        publicationDate: {}
+        releaseUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        createDate: {}
+        modificationTime: {}
+        indexTime: {}
+        permissionModificationTime: {}
+        permissionIndexTime: {}
+        storageIdentifier:
+          type: string
+        dtype:
+          type: string
+        protocol:
+          type: string
+        authority:
+          type: string
+        globalIdCreateTime: {}
+        identifier:
+          type: string
+        identifierRegistered:
+          type: boolean
+        alternativePersistentIndentifiers:
+          items:
+            $ref: '#/components/schemas/AlternativePersistentIdentifier'
+        previewImageAvailable:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        roleAssignments:
+          items:
+            $ref: '#/components/schemas/RoleAssignment'
+        mergeable:
+          type: boolean
+      allOf:
+      - $ref: '#/components/schemas/DvObject'
+      - $ref: '#/components/schemas/DvObject'
+    ExternalTool:
+      type: object
+      properties:
+        id:
+          type: number
+        displayName:
+          type: string
+        toolName:
+          type: string
+        description:
+          type: string
+        externalToolTypes:
+          items:
+            $ref: '#/components/schemas/ExternalToolType'
+        scope:
+          $ref: '#/components/schemas/Scope'
+        toolUrl:
+          type: string
+        toolParameters:
+          type: string
+        contentType:
+          type: string
+    CategoryMetadata:
+      type: object
+      properties:
+        id:
+          type: number
+        category:
+          $ref: '#/components/schemas/VariableCategory'
+        variableMetadata:
+          $ref: '#/components/schemas/VariableMetadata'
+        wfreq:
+          type: number
+    RoleAssignment:
+      type: object
+      properties:
+        id:
+          type: number
+        assigneeIdentifier:
+          type: string
+        role:
+          $ref: '#/components/schemas/DataverseRole'
+        definitionPoint:
+          $ref: '#/components/schemas/DvObject'
+        privateUrlToken:
+          type: string
+        privateUrlAnonymizedAccess:
+          type: boolean
+    VariableType:
+      enum:
+      - NUMERIC
+      - CHARACTER
+    OAuth2TokenData:
+      type: object
+      properties:
+        id:
+          type: number
+        user:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        oauthProviderId:
+          type: string
+        expiryDate: {}
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        tokenType:
+          type: string
+        rawResponse:
+          type: string
+    ImageFormat:
+      enum:
+      - SQUARE
+      - RECTANGLE
+    datasetReplaceFileItem:
+      type: object
+      properties:
+        fdi:
+          $ref: '#/components/schemas/datasetFileDifferenceItem'
+        leftColumn:
+          type: string
+        file1Id:
+          type: string
+        file2Id:
+          type: string
+        file1ChecksumType:
+          $ref: '#/components/schemas/ChecksumType'
+        file2ChecksumType:
+          $ref: '#/components/schemas/ChecksumType'
+        file1ChecksumValue:
+          type: string
+        file2ChecksumValue:
+          type: string
+    FileVersionDifference:
+      type: object
+      properties:
+        newFileMetadata:
+          $ref: '#/components/schemas/FileMetadata'
+        originalFileMetadata:
+          $ref: '#/components/schemas/FileMetadata'
+        details:
+          type: boolean
+        same:
+          type: boolean
+        differenceSummaryGroups:
+          items:
+            $ref: '#/components/schemas/FileDifferenceSummaryGroup'
+        differenceDetailItems:
+          items:
+            $ref: '#/components/schemas/FileDifferenceDetailItem'
+    DatasetFieldCompoundValue:
+      type: object
+      properties:
+        id:
+          type: number
+        displayOrder:
+          type: integer
+        parentDatasetField:
+          $ref: '#/components/schemas/DatasetField'
+        childDatasetFields:
+          items:
+            $ref: '#/components/schemas/DatasetField'
+        linkMap: {}
+        linkScheme:
+          type: string
+        linkValue:
+          type: string
+    IngestReport:
+      type: object
+      properties:
+        id:
+          type: number
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        report:
+          type: string
+        type:
+          type: integer
+        status:
+          type: integer
+        startTime: {}
+        endTime: {}
+    FileMetadata:
+      type: object
+      properties:
+        label:
+          type: string
+        directoryLabel:
+          type: string
+        description:
+          type: string
+        restricted:
+          type: boolean
+        datasetVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        provFreeForm:
+          type: string
+        variableMetadatas:
+          items:
+            $ref: '#/components/schemas/VariableMetadata'
+        varGroups:
+          items:
+            $ref: '#/components/schemas/VarGroup'
+        fileCategories:
+          items:
+            $ref: '#/components/schemas/DataFileCategory'
+        id:
+          type: number
+        version:
+          type: number
+        inPriorVersion:
+          type: boolean
+        selected:
+          type: boolean
+        restrictedUI:
+          type: boolean
+        fileVersionDifference:
+          $ref: '#/components/schemas/FileVersionDifference'
+        contributorNames:
+          type: string
+    datasetFileDifferenceItem:
+      type: object
+      properties:
+        fileId:
+          type: string
+        fileChecksumType:
+          $ref: '#/components/schemas/ChecksumType'
+        fileChecksumValue:
+          type: string
+        fileName1:
+          type: string
+        fileType1:
+          type: string
+        fileSize1:
+          type: string
+        fileCat1:
+          type: string
+        fileDesc1:
+          type: string
+        fileProvFree1:
+          type: string
+        fileRest1:
+          type: string
+        fileName2:
+          type: string
+        fileType2:
+          type: string
+        fileSize2:
+          type: string
+        fileCat2:
+          type: string
+        fileDesc2:
+          type: string
+        fileProvFree2:
+          type: string
+        fileRest2:
+          type: string
+        file1Empty:
+          type: boolean
+        file2Empty:
+          type: boolean
+    DataverseType:
+      enum:
+      - RESEARCHERS
+      - RESEARCH_PROJECTS
+      - JOURNALS
+      - ORGANIZATIONS_INSTITUTIONS
+      - TEACHING_COURSES
+      - UNCATEGORIZED
+      - LABORATORY
+      - RESEARCH_GROUP
+      - DEPARTMENT
+    DataverseEntity:
+      type: object
+      properties:
+        mergeable:
+          type: boolean
+    DataverseRole:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        description:
+          type: string
+        alias:
+          type: string
+        permissionBits:
+          type: number
+        owner:
+          $ref: '#/components/schemas/DvObject'
+    SavedSearch:
+      type: object
+      properties:
+        id:
+          type: number
+        query:
+          type: string
+        savedSearchFilterQueries:
+          items:
+            $ref: '#/components/schemas/SavedSearchFilterQuery'
+        definitionPoint:
+          $ref: '#/components/schemas/Dataverse'
+        creator:
+          $ref: '#/components/schemas/AuthenticatedUser'
+    DatasetFieldType:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        fieldType:
+          $ref: '#/components/schemas/FieldType'
+        allowControlledVocabulary:
+          type: boolean
+        watermark:
+          type: string
+        validationFormat:
+          type: string
+        dataverseFacets:
+          items:
+            $ref: '#/components/schemas/DataverseFacet'
+        dataverseFieldTypeInputLevels:
+          items:
+            $ref: '#/components/schemas/DataverseFieldTypeInputLevel'
+        searchValue:
+          type: string
+        listValues:
+          items:
+            type: string
+        controlledVocabularyValuesByStrValue: {}
+        requiredDV:
+          type: boolean
+        include:
+          type: boolean
+        optionSelectItems:
+          items:
+            type: object
+        displayOrder:
+          type: integer
+        displayFormat:
+          type: string
+        allowMultiples:
+          type: boolean
+        facetable:
+          type: boolean
+        displayOnCreate:
+          type: boolean
+        metadataBlock:
+          $ref: '#/components/schemas/MetadataBlock'
+        uri:
+          type: string
+        controlledVocabularyValues:
+          items:
+            $ref: '#/components/schemas/ControlledVocabularyValue'
+        childDatasetFieldTypes:
+          items:
+            $ref: '#/components/schemas/DatasetFieldType'
+        parentDatasetFieldType: {}
+        required:
+          type: boolean
+        advancedSearchFieldType:
+          type: boolean
+        datasetFields:
+          items:
+            $ref: '#/components/schemas/DatasetField'
+        datasetFieldDefaultValues:
+          items:
+            $ref: '#/components/schemas/DatasetFieldDefaultValue'
+    DatasetExternalCitations:
+      type: object
+      properties:
+        id:
+          type: number
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        citedByUrl:
+          type: string
+    Alignment:
+      enum:
+      - LEFT
+      - CENTER
+      - RIGHT
+    SavedSearchFilterQuery:
+      type: object
+      properties:
+        id:
+          type: number
+        filterQuery:
+          type: string
+        savedSearch:
+          $ref: '#/components/schemas/SavedSearch'
+    DataTable:
+      type: object
+      properties:
+        id:
+          type: number
+        unf:
+          type: string
+        caseQuantity:
+          type: number
+        varQuantity:
+          type: number
+        recordsPerCase:
+          type: number
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        dataVariables:
+          items:
+            $ref: '#/components/schemas/DataVariable'
+        originalFileFormat:
+          type: string
+        originalFormatVersion:
+          type: string
+        originalFileSize:
+          type: number
+        originalFileName:
+          type: string
+    VariableCategory:
+      type: object
+      properties:
+        id:
+          type: number
+        dataVariable:
+          $ref: '#/components/schemas/DataVariable'
+        value:
+          type: string
+        label:
+          type: string
+        missing:
+          type: boolean
+        catOrder:
+          type: integer
+        frequency:
+          type: number
+    DataverseFacet:
+      type: object
+      properties:
+        id:
+          type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        datasetFieldType:
+          $ref: '#/components/schemas/DatasetFieldType'
+        displayOrder:
+          type: integer
+    UserNotification:
+      type: object
+      properties:
+        id:
+          type: number
+        user:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        requestor:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        sendDate: {}
+        readNotification:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/Type'
+        objectId:
+          type: number
+        displayAsRead:
+          type: boolean
+        roleString:
+          type: string
+        emailed:
+          type: boolean
+        theObject:
+          type: object
+    DataverseLinkingDataverse:
+      type: object
+      properties:
+        id:
+          type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        linkingDataverse:
+          $ref: '#/components/schemas/Dataverse'
+        linkCreateTime: {}
+    DatasetFieldValue:
+      type: object
+      properties:
+        id:
+          type: number
+        value:
+          type: string
+        displayOrder:
+          type: integer
+        datasetField:
+          $ref: '#/components/schemas/DatasetField'
+        validationMessage:
+          type: string
+    VariableRangeItem:
+      type: object
+      properties:
+        id:
+          type: number
+        value: {}
+        dataVariable:
+          $ref: '#/components/schemas/DataVariable'
+    FieldType:
+      enum:
+      - TEXT
+      - TEXTBOX
+      - DATE
+      - EMAIL
+      - URL
+      - FLOAT
+      - INT
+      - NONE
+    DataFile:
+      type: object
+      properties:
+        contentType:
+          type: string
+        checksumType:
+          $ref: '#/components/schemas/ChecksumType'
+        checksumValue:
+          type: string
+        rootDataFileId:
+          type: number
+        previousDataFileId:
+          type: number
+        filesize:
+          type: number
+        restricted:
+          type: boolean
+        provEntityName:
+          type: string
+        dataTables:
+          items:
+            $ref: '#/components/schemas/DataTable'
+        auxiliaryFiles:
+          items:
+            $ref: '#/components/schemas/AuxiliaryFile'
+        ingestReports:
+          items:
+            $ref: '#/components/schemas/IngestReport'
+        ingestRequest:
+          $ref: '#/components/schemas/IngestRequest'
+        dataFileTags:
+          items:
+            $ref: '#/components/schemas/DataFileTag'
+        fileMetadatas:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        guestbookResponses:
+          items:
+            $ref: '#/components/schemas/GuestbookResponse'
+        ingestStatus:
+          type: object
+        thumbnailForDataset:
+          $ref: '#/components/schemas/Dataset'
+        embargo:
+          $ref: '#/components/schemas/Embargo'
+        deleted:
+          type: boolean
+        markedAsDuplicate:
+          type: boolean
+        duplicateFilename:
+          type: string
+        fileAccessRequesters:
+          items:
+            $ref: '#/components/schemas/AuthenticatedUser'
+        id:
+          type: number
+        owner: {}
+        publicationDate: {}
+        releaseUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        createDate: {}
+        modificationTime: {}
+        indexTime: {}
+        permissionModificationTime: {}
+        permissionIndexTime: {}
+        storageIdentifier:
+          type: string
+        dtype:
+          type: string
+        protocol:
+          type: string
+        authority:
+          type: string
+        globalIdCreateTime: {}
+        identifier:
+          type: string
+        identifierRegistered:
+          type: boolean
+        alternativePersistentIndentifiers:
+          items:
+            $ref: '#/components/schemas/AlternativePersistentIdentifier'
+        previewImageAvailable:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        roleAssignments:
+          items:
+            $ref: '#/components/schemas/RoleAssignment'
+        mergeable:
+          type: boolean
+      allOf:
+      - $ref: '#/components/schemas/DvObject'
+    GuestbookResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        guestbook:
+          $ref: '#/components/schemas/Guestbook'
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        datasetVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        authenticatedUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        fileDownload:
+          $ref: '#/components/schemas/FileDownload'
+        customQuestionResponses:
+          items:
+            $ref: '#/components/schemas/CustomQuestionResponse'
+        name:
+          type: string
+        email:
+          type: string
+        institution:
+          type: string
+        position:
+          type: string
+        responseTime: {}
+        writeResponse:
+          type: boolean
+        externalTool:
+          $ref: '#/components/schemas/ExternalTool'
+    ControlledVocabAlternate:
+      type: object
+      properties:
+        id:
+          type: number
+        strValue:
+          type: string
+        datasetFieldType:
+          $ref: '#/components/schemas/DatasetFieldType'
+        controlledVocabularyValue:
+          $ref: '#/components/schemas/ControlledVocabularyValue'
+    DifferenceSummaryItem:
+      type: object
+      properties:
+        displayName:
+          type: string
+        changed:
+          type: integer
+        added:
+          type: integer
+        deleted:
+          type: integer
+        replaced:
+          type: integer
+        multiple:
+          type: boolean
+    VariableMetadataUtil:
+      type: object
+    Dataverse:
+      type: object
+      properties:
+        name:
+          type: string
+        alias:
+          type: string
+        description:
+          type: string
+        dataverseType:
+          $ref: '#/components/schemas/DataverseType'
+        permissionRoot:
+          type: boolean
+        affiliation:
+          type: string
+        roles:
+          items:
+            $ref: '#/components/schemas/DataverseRole'
+        defaultContributorRole:
+          $ref: '#/components/schemas/DataverseRole'
+        metadataBlockRoot:
+          type: boolean
+        facetRoot:
+          type: boolean
+        themeRoot:
+          type: boolean
+        templateRoot:
+          type: boolean
+        dataverseTheme:
+          $ref: '#/components/schemas/DataverseTheme'
+        dataverseContacts:
+          items:
+            $ref: '#/components/schemas/DataverseContact'
+        metadataBlocks:
+          items:
+            $ref: '#/components/schemas/MetadataBlock'
+        dataverseFacets:
+          items:
+            $ref: '#/components/schemas/DataverseFacet'
+        citationDatasetFieldTypes:
+          items:
+            $ref: '#/components/schemas/DatasetFieldType'
+        dataverseSubjects:
+          items:
+            $ref: '#/components/schemas/ControlledVocabularyValue'
+        dataverseFeaturedDataverses:
+          items:
+            $ref: '#/components/schemas/DataverseFeaturedDataverse'
+        dataverseFeaturingDataverses:
+          items:
+            $ref: '#/components/schemas/DataverseFeaturedDataverse'
+        dataverseLinkingDataverses:
+          items:
+            $ref: '#/components/schemas/DataverseLinkingDataverse'
+        dataverseLinkedDataverses:
+          items:
+            $ref: '#/components/schemas/DataverseLinkingDataverse'
+        datasetLinkingDataverses:
+          items:
+            $ref: '#/components/schemas/DatasetLinkingDataverse'
+        dataverseFieldTypeInputLevels:
+          items:
+            $ref: '#/components/schemas/DataverseFieldTypeInputLevel'
+        defaultTemplate:
+          $ref: '#/components/schemas/Template'
+        savedSearches:
+          items:
+            $ref: '#/components/schemas/SavedSearch'
+        templates:
+          items:
+            $ref: '#/components/schemas/Template'
+        guestbooks:
+          items:
+            $ref: '#/components/schemas/Guestbook'
+        harvestingClientConfigs:
+          items:
+            $ref: '#/components/schemas/HarvestingClient'
+        guestbookRoot:
+          type: boolean
+        storageDriver:
+          type: string
+        metadataLanguage:
+          type: string
+        externalLabelSetName:
+          type: string
+        id:
+          type: number
+        owner: {}
+        publicationDate: {}
+        releaseUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        createDate: {}
+        modificationTime: {}
+        indexTime: {}
+        permissionModificationTime: {}
+        permissionIndexTime: {}
+        storageIdentifier:
+          type: string
+        dtype:
+          type: string
+        protocol:
+          type: string
+        authority:
+          type: string
+        globalIdCreateTime: {}
+        identifier:
+          type: string
+        identifierRegistered:
+          type: boolean
+        alternativePersistentIndentifiers:
+          items:
+            $ref: '#/components/schemas/AlternativePersistentIdentifier'
+        previewImageAvailable:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        roleAssignments:
+          items:
+            $ref: '#/components/schemas/RoleAssignment'
+        mergeable:
+          type: boolean
+      allOf:
+      - $ref: '#/components/schemas/DvObjectContainer'
+    DataFileCategory:
+      type: object
+      properties:
+        id:
+          type: number
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        name:
+          type: string
+        fileMetadatas:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+    CustomQuestionValue:
+      type: object
+      properties:
+        id:
+          type: number
+        valueString:
+          type: string
+        displayOrder:
+          type: integer
+        customQuestion:
+          $ref: '#/components/schemas/CustomQuestion'
+    FileDifferenceSummaryGroup:
+      type: object
+      properties:
+        name:
+          type: string
+        fileDifferenceSummaryItems:
+          items:
+            $ref: '#/components/schemas/FileDifferenceSummaryItem'
+    CustomQuestionResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        guestbookResponse:
+          $ref: '#/components/schemas/GuestbookResponse'
+        customQuestion:
+          $ref: '#/components/schemas/CustomQuestion'
+        response:
+          type: string
+        responseSelectItems:
+          items:
+            type: object
+    VersionState:
+      enum:
+      - DRAFT
+      - RELEASED
+      - ARCHIVED
+      - DEACCESSIONED
+    WorkflowComment:
+      type: object
+      properties:
+        id:
+          type: number
+        datasetVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        type:
+          $ref: '#/components/schemas/Type'
+        message:
+          type: string
+        authenticatedUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        created: {}
+        toBeShown:
+          type: boolean
+    DataverseTheme:
+      type: object
+      properties:
+        id:
+          type: number
+        logoFormat:
+          $ref: '#/components/schemas/ImageFormat'
+        logoAlignment:
+          $ref: '#/components/schemas/Alignment'
+        logoBackgroundColor:
+          type: string
+        logo:
+          type: string
+        logoFooterAlignment:
+          $ref: '#/components/schemas/Alignment'
+        logoFooterBackgroundColor:
+          type: string
+        logoFooter:
+          type: string
+        tagline:
+          type: string
+        linkUrl:
+          type: string
+        linkColor:
+          type: string
+        textColor:
+          type: string
+        backgroundColor:
+          type: string
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+    DataVariable:
+      type: object
+      properties:
+        id:
+          type: number
+        dataTable:
+          $ref: '#/components/schemas/DataTable'
+        name:
+          type: string
+        label:
+          type: string
+        weighted:
+          type: boolean
+        fileStartPosition:
+          type: number
+        fileEndPosition:
+          type: number
+        interval:
+          $ref: '#/components/schemas/VariableInterval'
+        type:
+          $ref: '#/components/schemas/VariableType'
+        format:
+          type: string
+        formatCategory:
+          type: string
+        recordSegmentNumber:
+          type: number
+        invalidRanges:
+          items:
+            $ref: '#/components/schemas/VariableRange'
+        invalidRangeItems:
+          items:
+            $ref: '#/components/schemas/VariableRangeItem'
+        summaryStatistics:
+          items:
+            $ref: '#/components/schemas/SummaryStatistic'
+        unf:
+          type: string
+        categories:
+          items:
+            $ref: '#/components/schemas/VariableCategory'
+        orderedFactor:
+          type: boolean
+        factor:
+          type: boolean
+        fileOrder:
+          type: integer
+        numberOfDecimalPoints:
+          type: number
+        variableMetadatas:
+          items:
+            $ref: '#/components/schemas/VariableMetadata'
+    ClientHarvestRun:
+      type: object
+      properties:
+        id:
+          type: number
+        harvestingClient:
+          $ref: '#/components/schemas/HarvestingClient'
+        harvestResult:
+          $ref: '#/components/schemas/RunResultType'
+        startTime: {}
+        finishTime: {}
+        harvestedDatasetCount:
+          type: number
+        failedDatasetCount:
+          type: number
+        deletedDatasetCount:
+          type: number
+    TermsOfUseAndAccess:
+      type: object
+      properties:
+        id:
+          type: number
+        datasetVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        template:
+          $ref: '#/components/schemas/Template'
+        license:
+          $ref: '#/components/schemas/License'
+        termsOfUse:
+          type: string
+        termsOfAccess:
+          type: string
+        confidentialityDeclaration:
+          type: string
+        specialPermissions:
+          type: string
+        restrictions:
+          type: string
+        citationRequirements:
+          type: string
+        depositorRequirements:
+          type: string
+        conditions:
+          type: string
+        disclaimer:
+          type: string
+        dataAccessPlace:
+          type: string
+        originalArchive:
+          type: string
+        availabilityStatus:
+          type: string
+        contactForAccess:
+          type: string
+        sizeOfCollection:
+          type: string
+        studyCompletion:
+          type: string
+        fileAccessRequest:
+          type: boolean
+    License:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        shortDescription:
+          type: string
+        uri:
+          type: string
+        iconUrl:
+          type: string
+        active:
+          type: boolean
+        isDefault:
+          type: boolean
+        termsOfUseAndAccess:
+          items:
+            $ref: '#/components/schemas/TermsOfUseAndAccess'
+    TagType:
+      enum:
+      - Survey
+      - TimeSeries
+      - Panel
+      - Event
+      - Genomics
+      - Network
+      - Geospatial
+    DatasetMetrics:
+      type: object
+      properties:
+        id:
+          type: number
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        monthYear:
+          type: string
+        viewsTotalRegular:
+          type: number
+        viewsUniqueRegular:
+          type: number
+        viewsTotalMachine:
+          type: number
+        viewsUniqueMachine:
+          type: number
+        downloadsTotalRegular:
+          type: number
+        downloadsUniqueRegular:
+          type: number
+        downloadsTotalMachine:
+          type: number
+        downloadsUniqueMachine:
+          type: number
+        countryCode:
+          type: string
+        viewsUnique:
+          type: number
+        viewsTotal:
+          type: number
+        downloadsUnique:
+          type: number
+        downloadsTotal:
+          type: number
+    DataFileTag:
+      type: object
+      properties:
+        id:
+          type: number
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        type:
+          $ref: '#/components/schemas/TagType'
+    DatasetFieldDefaultValue:
+      type: object
+      properties:
+        id:
+          type: number
+        datasetField:
+          $ref: '#/components/schemas/DatasetFieldType'
+        defaultValueSet:
+          $ref: '#/components/schemas/DefaultValueSet'
+        childDatasetFieldDefaultValues:
+          items:
+            $ref: '#/components/schemas/DatasetFieldDefaultValue'
+        parentDatasetFieldDefaultValue: {}
+        strValue:
+          type: string
+        displayOrder:
+          type: integer
+    Cart:
+      type: object
+      properties:
+        contents:
+          items:
+            type: object
+    VariableRangeType:
+      enum:
+      - MIN
+      - MAX
+      - MIN_EXCLUSIVE
+      - MAX_EXCLUSIVE
+      - POINT
+    VariableInterval:
+      enum:
+      - DISCRETE
+      - CONTINUOUS
+      - NOMINAL
+      - DICHOTOMOUS
+    AuthenticatedUserLookup:
+      type: object
+      properties:
+        id:
+          type: number
+        authenticationProviderId:
+          type: string
+        persistentUserId:
+          type: string
+        authenticatedUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+    DefaultValueSet:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        datasetFieldDefaultValues:
+          items:
+            $ref: '#/components/schemas/DatasetFieldDefaultValue'
+    CustomQuestion:
+      type: object
+      properties:
+        id:
+          type: number
+        guestbook:
+          $ref: '#/components/schemas/Guestbook'
+        customQuestionResponses:
+          items:
+            $ref: '#/components/schemas/CustomQuestionResponse'
+        customQuestionValues:
+          items:
+            $ref: '#/components/schemas/CustomQuestionValue'
+        questionType:
+          type: string
+        questionString:
+          type: string
+        required:
+          type: boolean
+        hidden:
+          type: boolean
+        displayOrder:
+          type: integer
+    ControlledVocabularyValue:
+      type: object
+      properties:
+        id:
+          type: number
+        strValue:
+          type: string
+        identifier:
+          type: string
+        displayOrder:
+          type: integer
+        datasetFieldType:
+          $ref: '#/components/schemas/DatasetFieldType'
+        controlledVocabAlternates:
+          items:
+            $ref: '#/components/schemas/ControlledVocabAlternate'
+    DataverseFieldTypeInputLevel:
+      type: object
+      properties:
+        id:
+          type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        datasetFieldType:
+          $ref: '#/components/schemas/DatasetFieldType'
+        include:
+          type: boolean
+        required:
+          type: boolean
+    Template:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        usageCount:
+          type: number
+        createTime: {}
+        termsOfUseAndAccess:
+          $ref: '#/components/schemas/TermsOfUseAndAccess'
+        datasetFields:
+          items:
+            $ref: '#/components/schemas/DatasetField'
+        metadataBlocksForView: {}
+        metadataBlocksForEdit: {}
+        isDefaultForDataverse:
+          type: boolean
+        dataversesHasAsDefault:
+          items:
+            $ref: '#/components/schemas/Dataverse'
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+    FileDifferenceSummaryItem:
+      type: object
+      properties:
+        name:
+          type: string
+        added:
+          type: integer
+        changed:
+          type: integer
+        deleted:
+          type: integer
+        replaced:
+          type: integer
+        multiple:
+          type: boolean
+    DifferenceSummaryGroup:
+      type: object
+      properties:
+        displayName:
+          type: string
+        type:
+          type: string
+        differenceSummaryItems:
+          items:
+            $ref: '#/components/schemas/DifferenceSummaryItem'
+    Scope:
+      enum:
+      - DATASET
+      - FILE
+    HarvestingClient:
+      type: object
+      properties:
+        id:
+          type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        harvestedDatasets:
+          items:
+            $ref: '#/components/schemas/Dataset'
+        name:
+          type: string
+        harvestType:
+          type: string
+        harvestStyle:
+          type: string
+        harvestingUrl:
+          type: string
+        archiveUrl:
+          type: string
+        archiveDescription:
+          type: string
+        harvestingSet:
+          type: string
+        metadataPrefix:
+          type: string
+        harvestHistory:
+          items:
+            $ref: '#/components/schemas/ClientHarvestRun'
+        scheduled:
+          type: boolean
+        schedulePeriod:
+          type: string
+        scheduleHourOfDay:
+          type: integer
+        scheduleDayOfWeek:
+          type: integer
+        harvestingNow:
+          type: boolean
+        deleted:
+          type: boolean
+    ChecksumType:
+      enum:
+      - MD5
+      - SHA1
+      - SHA256
+      - SHA512
+    VariableMetadata:
+      type: object
+      properties:
+        id:
+          type: number
+        dataVariable:
+          $ref: '#/components/schemas/DataVariable'
+        fileMetadata:
+          $ref: '#/components/schemas/FileMetadata'
+        label:
+          type: string
+        literalquestion:
+          type: string
+        postquestion:
+          type: string
+        interviewinstruction:
+          type: string
+        universe:
+          type: string
+        notes:
+          type: string
+        isweightvar:
+          type: boolean
+        weighted:
+          type: boolean
+        categoriesMetadata:
+          items:
+            $ref: '#/components/schemas/CategoryMetadata'
+        weightvariable:
+          $ref: '#/components/schemas/DataVariable'
+    Guestbook:
+      type: object
+      properties:
+        id:
+          type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        customQuestions:
+          items:
+            $ref: '#/components/schemas/CustomQuestion'
+        name:
+          type: string
+        enabled:
+          type: boolean
+        nameRequired:
+          type: boolean
+        emailRequired:
+          type: boolean
+        institutionRequired:
+          type: boolean
+        positionRequired:
+          type: boolean
+        createTime: {}
+        deletable:
+          type: boolean
+        usageCount:
+          type: number
+        usageCountDataverse:
+          type: number
+        responseCount:
+          type: number
+        responseCountDataverse:
+          type: number
+    Dataset:
+      type: object
+      properties:
+        files:
+          items:
+            $ref: '#/components/schemas/DataFile'
+        lastExportTime: {}
+        versions:
+          items:
+            $ref: '#/components/schemas/DatasetVersion'
+        datasetLocks:
+          items:
+            $ref: '#/components/schemas/DatasetLock'
+        thumbnailFile:
+          $ref: '#/components/schemas/DataFile'
+        datasetMetrics:
+          items:
+            $ref: '#/components/schemas/DatasetMetrics'
+        datasetExternalCitations:
+          items:
+            $ref: '#/components/schemas/DatasetExternalCitations'
+        useGenericThumbnail:
+          type: boolean
+        guestbook:
+          $ref: '#/components/schemas/Guestbook'
+        datasetLinkingDataverses:
+          items:
+            $ref: '#/components/schemas/DatasetLinkingDataverse'
+        fileAccessRequest:
+          type: boolean
+        dataFileCategories:
+          items:
+            $ref: '#/components/schemas/DataFileCategory'
+        citationDateDatasetFieldType:
+          $ref: '#/components/schemas/DatasetFieldType'
+        harvestedFrom:
+          $ref: '#/components/schemas/HarvestingClient'
+        harvestIdentifier:
+          type: string
+        storageDriver:
+          type: string
+        metadataLanguage:
+          type: string
+        externalLabelSetName:
+          type: string
+        id:
+          type: number
+        owner: {}
+        publicationDate: {}
+        releaseUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        createDate: {}
+        modificationTime: {}
+        indexTime: {}
+        permissionModificationTime: {}
+        permissionIndexTime: {}
+        storageIdentifier:
+          type: string
+        dtype:
+          type: string
+        protocol:
+          type: string
+        authority:
+          type: string
+        globalIdCreateTime: {}
+        identifier:
+          type: string
+        identifierRegistered:
+          type: boolean
+        alternativePersistentIndentifiers:
+          items:
+            $ref: '#/components/schemas/AlternativePersistentIdentifier'
+        previewImageAvailable:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        roleAssignments:
+          items:
+            $ref: '#/components/schemas/RoleAssignment'
+        mergeable:
+          type: boolean
+      allOf:
+      - $ref: '#/components/schemas/DvObjectContainer'
+    SummaryStatisticType:
+      enum:
+      - MEAN
+      - MEDN
+      - MODE
+      - MIN
+      - MAX
+      - STDEV
+      - VALD
+      - INVD
+    AuthenticatedUser:
+      type: object
+      properties:
+        id:
+          type: number
+        userIdentifier:
+          type: string
+        email:
+          type: string
+        affiliation:
+          type: string
+        position:
+          type: string
+        lastName:
+          type: string
+        firstName:
+          type: string
+        emailConfirmed: {}
+        createdTime: {}
+        lastLoginTime: {}
+        lastApiUseTime: {}
+        cart:
+          $ref: '#/components/schemas/Cart'
+        superuser:
+          type: boolean
+        deactivated:
+          type: boolean
+        deactivatedTime: {}
+        shibIdentityProvider:
+          type: string
+        notifications:
+          items:
+            $ref: '#/components/schemas/UserNotification'
+        requests:
+          items:
+            $ref: '#/components/schemas/UserNotification'
+        datasetLocks:
+          items:
+            $ref: '#/components/schemas/DatasetLock'
+        oAuth2TokenDatas:
+          items:
+            $ref: '#/components/schemas/OAuth2TokenData'
+        roles:
+          type: string
+        authProviderId:
+          type: string
+        authProviderFactoryAlias:
+          type: string
+        authenticatedUserLookup:
+          $ref: '#/components/schemas/AuthenticatedUserLookup'
+    VarGroup:
+      type: object
+      properties:
+        id:
+          type: number
+        label:
+          type: string
+        fileMetadata:
+          $ref: '#/components/schemas/FileMetadata'
+        varsInGroup:
+          items:
+            $ref: '#/components/schemas/DataVariable'
+    DatasetLock:
+      type: object
+      properties:
+        id:
+          type: number
+        startTime: {}
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        user:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        reason:
+          $ref: '#/components/schemas/Reason'
+        info:
+          type: string
+    RunResultType:
+      enum:
+      - SUCCESS
+      - FAILURE
+      - INPROGRESS
+    DataverseContact:
+      type: object
+      properties:
+        id:
+          type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        contactEmail:
+          type: string
+        displayOrder:
+          type: integer
+    DatasetVersionDifference:
+      type: object
+      properties:
+        newVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        originalVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        detailDataByBlock:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/DatasetField'
+        datasetFilesDiffList:
+          items:
+            $ref: '#/components/schemas/datasetFileDifferenceItem'
+        datasetFilesReplacementList:
+          items:
+            $ref: '#/components/schemas/datasetReplaceFileItem'
+        addedFiles:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        removedFiles:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        changedFileMetadata:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        changedVariableMetadata:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        replacedFiles:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        changedTermsAccess:
+          items:
+            type: string
+        summaryDataForNote: {}
+        blockDataForNote: {}
+        variableMetadataUtil:
+          $ref: '#/components/schemas/VariableMetadataUtil'
+        differenceSummaryGroups:
+          items:
+            $ref: '#/components/schemas/DifferenceSummaryGroup'
+    DatasetField:
+      type: object
+      properties:
+        id:
+          type: number
+        datasetFieldType:
+          $ref: '#/components/schemas/DatasetFieldType'
+        datasetVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        template:
+          $ref: '#/components/schemas/Template'
+        parentDatasetFieldCompoundValue:
+          $ref: '#/components/schemas/DatasetFieldCompoundValue'
+        datasetFieldCompoundValues:
+          items:
+            $ref: '#/components/schemas/DatasetFieldCompoundValue'
+        datasetFieldValues:
+          items:
+            $ref: '#/components/schemas/DatasetFieldValue'
+        controlledVocabularyValues:
+          items:
+            $ref: '#/components/schemas/ControlledVocabularyValue'
+        validationMessage:
+          type: string
+        required:
+          type: boolean
+        hasRequiredChildren:
+          type: boolean
+        include:
+          type: boolean
+    MetadataBlock:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        displayName:
+          type: string
+        namespaceUri:
+          type: string
+        datasetFieldTypes:
+          items:
+            $ref: '#/components/schemas/DatasetFieldType'
+        owner:
+          $ref: '#/components/schemas/Dataverse'
+        empty:
+          type: boolean
+        selected:
+          type: boolean
+        hasRequired:
+          type: boolean
+        showDatasetFieldTypes:
+          type: boolean
+    DatasetLinkingDataverse:
+      type: object
+      properties:
+        id:
+          type: number
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        linkingDataverse:
+          $ref: '#/components/schemas/Dataverse'
+        linkCreateTime: {}
+    DataverseFeaturedDataverse:
+      type: object
+      properties:
+        id:
+          type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        featuredDataverse:
+          $ref: '#/components/schemas/Dataverse'
+        displayOrder:
+          type: integer
+    FileDownload:
+      type: object
+      properties:
+        id:
+          type: number
+        guestbookResponse:
+          $ref: '#/components/schemas/GuestbookResponse'
+        downloadTimestamp: {}
+        selectedFileIds:
+          type: string
+        fileFormat:
+          type: string
+        downloadtype:
+          type: string
+        sessionId:
+          type: string
+    VariableRange:
+      type: object
+      properties:
+        id:
+          type: number
+        dataVariable:
+          $ref: '#/components/schemas/DataVariable'
+        beginValue:
+          type: string
+        endValue:
+          type: string
+        beginValueType:
+          $ref: '#/components/schemas/VariableRangeType'
+        endValueType:
+          $ref: '#/components/schemas/VariableRangeType'
