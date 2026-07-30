@@ -11,9 +11,21 @@ description: >-
   and an OAI-PMH metadata-harvesting endpoint. Most administrative, course, and portal
   systems are gated behind institutional SSO rather than openly documented.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/nycu.png
 url: https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/apis.yml
 tags:
   - Education
@@ -29,61 +41,608 @@ created: '2026-06-03'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: nycu:oauth
-    name: NYCU OAuth / Single Sign-On API
-    description: >-
-      OAuth 2.0 (RFC 6749) authorization-code service for third-party applications to
-      authenticate NYCU users and retrieve consented user data (email/username via the
-      profile scope, name via the name scope, and enrollment/employment status via the
-      status scope). Apps register a client and redirect-URI whitelist before use.
-    humanURL: https://id.nycu.edu.tw/docs/
-    baseURL: https://id.nycu.edu.tw
-    tags: [ Identity, OAuth, Authentication, SSO ]
-    properties:
-      - type: Documentation
-        url: https://id.nycu.edu.tw/docs/
-      - type: Signup
-        url: https://id.nycu.edu.tw/apply/app
-      - type: Authentication
-        url: https://id.nycu.edu.tw/o/authorize/
-  - aid: nycu:dataverse
-    name: NYCU Dataverse Repository API
-    description: >-
-      NYCU Dataverse (Dataverse Project v5.10.1) is the university's research-data
-      repository, established 2022. It exposes the standard Dataverse Native API and
-      Search API (e.g. /api/info/version, /api/search, dataset and dataverse endpoints)
-      for programmatic discovery and access to published datasets.
-    humanURL: https://guides.dataverse.org/en/5.10.1/api/
-    baseURL: https://dataverse.lib.nycu.edu.tw/api
-    tags: [ Research Data, Open Data, Repository, Dataverse ]
-    properties:
-      - type: Documentation
-        url: https://guides.dataverse.org/en/5.10.1/api/
-      - type: OpenAPI
-        url: openapi/nycu-dataverse.yaml
-      - type: JSONSchema
-        url: json-schema/nycu-dataset-schema.json
-      - type: JSONStructure
-        url: json-structure/nycu-dataset-structure.json
-      - type: Examples
-        url: examples/nycu-search-example.json
-      - type: Rules
-        url: rules/nycu-rules.yml
-      - type: Vocabulary
-        url: vocabulary/nycu-vocabulary.yml
-      - type: JSONLD
-        url: json-ld/nycu-context.jsonld
-  - aid: nycu:oai-pmh
-    name: NYCU Dataverse OAI-PMH Endpoint
-    description: >-
-      OAI-PMH 2.0 metadata-harvesting endpoint ("NYCU Dataverse Dataverse OAI Archive")
-      for harvesting dataset metadata from the NYCU Dataverse research-data repository.
-    humanURL: https://guides.dataverse.org/en/5.10.1/admin/harvestserver.html
-    baseURL: https://dataverse.lib.nycu.edu.tw/oai
-    tags: [ OAI-PMH, Metadata, Harvesting, Research Data ]
-    properties:
-      - type: Documentation
-        url: https://guides.dataverse.org/en/5.10.1/admin/harvestserver.html
+- aid: nycu:oauth
+  name: NYCU OAuth / Single Sign-On API
+  description: >-
+    OAuth 2.0 (RFC 6749) authorization-code service for third-party applications to authenticate NYCU
+    users and retrieve consented user data (email/username via the profile scope, name via the name scope,
+    and enrollment/employment status via the status scope). Apps register a client and redirect-URI whitelist
+    before use.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Identity
+  - OAuth
+  - Authentication
+  - SSO
+  properties:
+  - type: Documentation
+    url: https://id.nycu.edu.tw/docs/
+  - type: Signup
+    url: https://id.nycu.edu.tw/apply/app
+  - type: Authentication
+    url: https://id.nycu.edu.tw/o/authorize/
+- aid: nycu:oai-pmh
+  name: NYCU Dataverse OAI-PMH Endpoint
+  description: >-
+    OAI-PMH 2.0 metadata-harvesting endpoint ("NYCU Dataverse Dataverse OAI Archive") for harvesting dataset
+    metadata from the NYCU Dataverse research-data repository.
+  humanURL: https://guides.dataverse.org/en/5.10.1/admin/harvestserver.html
+  baseURL: https://dataverse.lib.nycu.edu.tw/oai
+  tags:
+  - OAI-PMH
+  - Metadata
+  - Harvesting
+  - Research Data
+  properties:
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/admin/harvestserver.html
+- aid: nycu:nycu-access-api
+  name: National Yang Ming Chiao Tung University Access API
+  description: >-
+    The Access API from National Yang Ming Chiao Tung University — 20 operation(s) for access.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Access
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-access-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-admin-api
+  name: National Yang Ming Chiao Tung University Admin API
+  description: >-
+    The Admin API from National Yang Ming Chiao Tung University — 113 operation(s) for admin.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Admin
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-admin-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-batch-api
+  name: National Yang Ming Chiao Tung University Batch API
+  description: The Batch API from National Yang Ming Chiao Tung University — 3 operation(s) for batch.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Batch
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-batch-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-builtin-users-api
+  name: National Yang Ming Chiao Tung University Builtin Users API
+  description: >-
+    The Builtin Users API from National Yang Ming Chiao Tung University — 4 operation(s) for builtin users.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Builtin Users
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-builtin-users-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-datasets-api
+  name: National Yang Ming Chiao Tung University Datasets API
+  description: >-
+    The Datasets API from National Yang Ming Chiao Tung University — 56 operation(s) for datasets.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-datatags-api
+  name: National Yang Ming Chiao Tung University Datatags API
+  description: >-
+    The Datatags API from National Yang Ming Chiao Tung University — 1 operation(s) for datatags.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Datatags
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-datatags-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-dataverses-api
+  name: National Yang Ming Chiao Tung University Dataverses API
+  description: >-
+    The Dataverses API from National Yang Ming Chiao Tung University — 26 operation(s) for dataverses.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Dataverses
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-dataverses-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-edit-api
+  name: National Yang Ming Chiao Tung University Edit API
+  description: The Edit API from National Yang Ming Chiao Tung University — 1 operation(s) for edit.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Edit
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-edit-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-files-api
+  name: National Yang Ming Chiao Tung University Files API
+  description: The Files API from National Yang Ming Chiao Tung University — 9 operation(s) for files.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-files-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-harvest-api
+  name: National Yang Ming Chiao Tung University Harvest API
+  description: >-
+    The Harvest API from National Yang Ming Chiao Tung University — 7 operation(s) for harvest.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Harvest
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-harvest-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-info-api
+  name: National Yang Ming Chiao Tung University Info API
+  description: The Info API from National Yang Ming Chiao Tung University — 40 operation(s) for info.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Info
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-info-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-ingest-api
+  name: National Yang Ming Chiao Tung University Ingest API
+  description: >-
+    The Ingest API from National Yang Ming Chiao Tung University — 1 operation(s) for ingest.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Ingest
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-ingest-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-licenses-api
+  name: National Yang Ming Chiao Tung University Licenses API
+  description: >-
+    The Licenses API from National Yang Ming Chiao Tung University — 5 operation(s) for licenses.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Licenses
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-licenses-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-mail-api
+  name: National Yang Ming Chiao Tung University Mail API
+  description: The Mail API from National Yang Ming Chiao Tung University — 1 operation(s) for mail.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Mail
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-mail-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-meta-api
+  name: National Yang Ming Chiao Tung University Meta API
+  description: The Meta API from National Yang Ming Chiao Tung University — 2 operation(s) for meta.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Meta
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-meta-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-metadatablocks-api
+  name: National Yang Ming Chiao Tung University Metadatablocks API
+  description: >-
+    The Metadatablocks API from National Yang Ming Chiao Tung University — 2 operation(s) for metadatablocks.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Metadatablocks
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-metadatablocks-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-mydata-api
+  name: National Yang Ming Chiao Tung University Mydata API
+  description: >-
+    The Mydata API from National Yang Ming Chiao Tung University — 1 operation(s) for mydata.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Mydata
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-mydata-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-notifications-api
+  name: National Yang Ming Chiao Tung University Notifications API
+  description: >-
+    The Notifications API from National Yang Ming Chiao Tung University — 1 operation(s) for notifications.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-pids-api
+  name: National Yang Ming Chiao Tung University Pids API
+  description: The Pids API from National Yang Ming Chiao Tung University — 4 operation(s) for pids.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Pids
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-pids-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-roles-api
+  name: National Yang Ming Chiao Tung University Roles API
+  description: The Roles API from National Yang Ming Chiao Tung University — 2 operation(s) for roles.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-roles-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-search-api
+  name: National Yang Ming Chiao Tung University Search API
+  description: >-
+    The Search API from National Yang Ming Chiao Tung University — 1 operation(s) for search.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-search-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-users-api
+  name: National Yang Ming Chiao Tung University Users API
+  description: The Users API from National Yang Ming Chiao Tung University — 8 operation(s) for users.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-users-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
+- aid: nycu:nycu-workflows-api
+  name: National Yang Ming Chiao Tung University Workflows API
+  description: >-
+    The Workflows API from National Yang Ming Chiao Tung University — 1 operation(s) for workflows.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://guides.dataverse.org/en/5.10.1/api/
+  - type: JSONSchema
+    url: json-schema/nycu-dataset-schema.json
+  - type: JSONStructure
+    url: json-structure/nycu-dataset-structure.json
+  - type: Examples
+    url: examples/nycu-search-example.json
+  - type: Rules
+    url: rules/nycu-rules.yml
+  - type: Vocabulary
+    url: vocabulary/nycu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nycu-context.jsonld
 common:
   - type: AgenticAccess
     url: agentic-access/nycu-agentic-access.yml
