@@ -1,0 +1,276 @@
+{
+  "item": [
+    {
+      "id": "b09ed356-2794-4011-9a74-c87b9d775a38",
+      "name": "Search",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dae8d289-f5dc-4518-be7e-5aa4b53b4ac7",
+          "name": "search",
+          "request": {
+            "name": "search",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "subtree",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "subtree",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_relevance",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_facets",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fq",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fq",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_entity_ids",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_api_urls",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_my_data",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query_entities",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata_fields",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata_fields",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "553b4786-54ee-4d66-9e91-f266c9ec6fbd",
+              "name": "Default Response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtree",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtree",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "show_relevance",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_facets",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "fq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_entity_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_api_urls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_my_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "query_entities",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "metadata_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata_fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dataverse.lib.nycu.edu.tw",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "72b0dca2-3340-4306-9d00-bc85fc2833e0",
+    "name": "NYCU Dataverse Native & Access Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAPI description served by the National Yang Ming Chiao Tung University (NYCU) Dataverse research-data repository (Dataverse Project v5.10.1) at https://dataverse.lib.nycu.edu.tw. Captured unmodified from the live /openapi endpoint; only the servers and info blocks were adjusted to point at the public base URL.",
+      "type": "text/plain"
+    }
+  }
+}

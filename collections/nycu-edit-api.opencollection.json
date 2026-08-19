@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NYCU Dataverse Native & Search Access Edit API",
+    "version": "5.10.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Edit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dataverse.lib.nycu.edu.tw/api/v1/edit/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

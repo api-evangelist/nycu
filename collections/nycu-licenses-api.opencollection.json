@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NYCU Dataverse Native & Search Access Licenses API",
+    "version": "5.10.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Licenses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getLicenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dataverse.lib.nycu.edu.tw/api/v1/licenses"
+          }
+        },
+        {
+          "info": {
+            "name": "addLicense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dataverse.lib.nycu.edu.tw/api/v1/licenses"
+          }
+        },
+        {
+          "info": {
+            "name": "getDefault",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dataverse.lib.nycu.edu.tw/api/v1/licenses/default"
+          }
+        },
+        {
+          "info": {
+            "name": "setDefault",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dataverse.lib.nycu.edu.tw/api/v1/licenses/default/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getLicenseById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dataverse.lib.nycu.edu.tw/api/v1/licenses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "deleteLicenseById",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dataverse.lib.nycu.edu.tw/api/v1/licenses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "setActiveState",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dataverse.lib.nycu.edu.tw/api/v1/licenses/:id/:active/:activeState",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "activeState",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
