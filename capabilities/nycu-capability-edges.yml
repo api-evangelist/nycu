@@ -1,0 +1,35 @@
+slug: nycu
+provider: National Yang Ming Chiao Tung University
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Builtin Users
+  spec_file: nycu-builtin-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: 'POST /api/v1/builtin-users  save; GET /api/v1/builtin-users/{username}/api-token  getApiToken;
+    schemas: PasswordResetData, BuiltinUser'
+  reason: 'Creation of local user accounts, password reset data and API token issuance for the Dataverse
+    installation — account provisioning and credential management, i.e. Identity & Access Management.
+    Not student records: these are repository platform accounts.'
+- tag: Users
+  spec_file: nycu-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: getAuthenticatedUserByToken; recreateToken; mergeInAuthenticatedUser; removeUserRoles
+  reason: Operations manage repository user accounts, API tokens, identifier changes and role removal
+    — account and access administration (IAM), not student records.

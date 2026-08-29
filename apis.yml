@@ -676,6 +676,9 @@ apis:
   - type: JSONLD
     url: json-ld/nycu-context.jsonld
 common:
+  - type: CapabilityMap
+    url: capabilities/nycu-capability-edges.yml
+    name: National Yang Ming Chiao Tung University Business Capability Map
   - type: AgenticAccess
     url: agentic-access/nycu-agentic-access.yml
   - type: DomainSecurity
