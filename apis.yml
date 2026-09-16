@@ -1,27 +1,23 @@
----
 aid: nycu
 name: National Yang Ming Chiao Tung University
 x-type: university
 x-category: Public Research University
-description: >-
-  National Yang Ming Chiao Tung University (NYCU) is a public research university in Hsinchu and
-  Taipei, Taiwan, formed in 2021 from the merger of National Yang-Ming University and National
-  Chiao Tung University. Its programmable footprint is small but genuinely its own in one place:
-  the NYCU OAuth service at id.nycu.edu.tw, an OAuth 2.0 (RFC 6749) authorization server run by
-  the university's Information Technology Service Center that lets approved applications
-  authenticate NYCU single sign-on users and read three consented identity attributes. It is
-  documented publicly, in Chinese and English, with its own terms of service and issue tracker,
-  and it is the only contract in this repo NYCU actually engineered. Everything else is a
-  relationship rather than an interface the university wrote. NYCU self-hosts a Dataverse
-  research-data repository and a DSpace institutional repository on its own network, and both
-  expose an anonymous OAI-PMH 2.0 harvesting endpoint that is institution-operated — but the
-  REST contracts underneath them belong to the Dataverse Project and DSpace, not to NYCU.
-  Library discovery is an Ex Libris Primo tenancy. NYCU is a DataCite direct member in its own
-  name, minting DOIs on prefix 10.57770 through its "NYCU Research Data Service" repository, and
-  is registered in ROR. There is no central developer portal, no open-data portal, no course or
-  timetable API, no OpenID Connect discovery document, and no publicly discoverable Shibboleth
-  or SAML identity provider. The course registration and timetable systems are human web
-  applications behind institutional login.
+description: 'National Yang Ming Chiao Tung University (NYCU) is a public research university in Hsinchu
+  and Taipei, Taiwan, formed in 2021 from the merger of National Yang-Ming University and National Chiao
+  Tung University. Its programmable footprint is small but genuinely its own in one place: the NYCU OAuth
+  service at id.nycu.edu.tw, an OAuth 2.0 (RFC 6749) authorization server run by the university''s Information
+  Technology Service Center that lets approved applications authenticate NYCU single sign-on users and
+  read three consented identity attributes. It is documented publicly, in Chinese and English, with its
+  own terms of service and issue tracker, and it is the only contract in this repo NYCU actually engineered.
+  Everything else is a relationship rather than an interface the university wrote. NYCU self-hosts a Dataverse
+  research-data repository and a DSpace institutional repository on its own network, and both expose an
+  anonymous OAI-PMH 2.0 harvesting endpoint that is institution-operated — but the REST contracts underneath
+  them belong to the Dataverse Project and DSpace, not to NYCU. Library discovery is an Ex Libris Primo
+  tenancy. NYCU is a DataCite direct member in its own name, minting DOIs on prefix 10.57770 through its
+  "NYCU Research Data Service" repository, and is registered in ROR. There is no central developer portal,
+  no open-data portal, no course or timetable API, no OpenID Connect discovery document, and no publicly
+  discoverable Shibboleth or SAML identity provider. The course registration and timetable systems are
+  human web applications behind institutional login.'
 type: Index
 deliveryModel:
   model: saas
@@ -53,57 +49,59 @@ access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/nycu.png
 url: https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
-  - University
-  - Taiwan
-  - Identity
-  - Authentication
-  - Single Sign-On
-  - Research Data
-  - Institutional Repository
-  - Library
-  - Metadata
+- Education
+- Higher Education
+- University
+- Taiwan
+- Identity
+- Authentication
+- Single Sign-On
+- Research Data
+- Institutional Repository
+- Library
+- Metadata
+- OAI-PMH
+- Identity Federation
 tags_raw:
-  - Education
-  - Higher Education
-  - University
-  - Taiwan
-  - Identity
-  - OAuth
-  - Authentication
-  - Single Sign-On
-  - Research Data
-  - Institutional Repository
-  - Library
-  - Metadata
-  - OAI-PMH
+- Education
+- Higher Education
+- University
+- Taiwan
+- Identity
+- OAuth
+- Authentication
+- Single Sign-On
+- Research Data
+- Institutional Repository
+- Library
+- Metadata
+- OAI-PMH
+- Identity Federation
 created: '2026-06-03'
-modified: '2026-09-01'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: nycu:oauth
   name: NYCU OAuth API
   x-operator: institution
-  x-operator-evidence: >-
-    id.nycu.edu.tw resolves to 140.113.199.41, inside NYCU's own 140.113.0.0/16 allocation. The
-    service, its developer documentation, its terms of service, its credit page and its issue
-    tracker (github.com/NYCU-OAuth) are all published by the university's Information Technology
-    Service Center. No vendor appears anywhere in the surface.
-  description: >-
-    The university's own OAuth 2.0 (RFC 6749) authorization server, fronting the NYCU single
-    sign-on account. Only the authorization-code grant is offered. Applications register a client
-    and a redirect-URI whitelist at /apply/app; the `profile` scope (account name and NYCU email)
-    is open to any registered developer, while `name` and `status` carry sensitive personal data
-    and must be justified and approved by the Information Technology Service Center — in
-    principle only for systems the university itself develops or operates. Six documented
-    endpoints. NYCU publishes no machine-readable description of the service and no discovery
-    document, so the OpenAPI here is derived from the university's own documentation.
+  x-operator-evidence: id.nycu.edu.tw resolves to 140.113.199.41, inside NYCU's own 140.113.0.0/16 allocation.
+    The service, its developer documentation, its terms of service, its credit page and its issue tracker
+    (github.com/NYCU-OAuth) are all published by the university's Information Technology Service Center.
+    No vendor appears anywhere in the surface.
+  description: The university's own OAuth 2.0 (RFC 6749) authorization server, fronting the NYCU single
+    sign-on account. Only the authorization-code grant is offered. Applications register a client and
+    a redirect-URI whitelist at /apply/app; the `profile` scope (account name and NYCU email) is open
+    to any registered developer, while `name` and `status` carry sensitive personal data and must be justified
+    and approved by the Information Technology Service Center — in principle only for systems the university
+    itself develops or operates. Six documented endpoints. NYCU publishes no machine-readable description
+    of the service and no discovery document, so the OpenAPI here is derived from the university's own
+    documentation.
   humanURL: https://id.nycu.edu.tw/docs/
   baseURL: https://id.nycu.edu.tw
   tags:
   - Identity
   - Authentication
+  - SSO
   - Single Sign-On
   tags_raw:
   - Identity
@@ -143,19 +141,15 @@ apis:
 - aid: nycu:dataverse-oai-pmh
   name: NYCU Dataverse OAI-PMH Endpoint
   x-operator: institution
-  x-operator-evidence: >-
-    dataverse.lib.nycu.edu.tw resolves to 140.113.39.17, inside NYCU's own allocation, and the
-    OAI-PMH Identify response names NYCU as the repository with adminEmail
-    cyliu+libdv@lib.nycu.edu.tw. OAI-PMH is an open protocol rather than a vendor contract, so
-    the endpoint is the institution's even though the software serving it is the Dataverse
-    Project's.
-  description: >-
-    Anonymous OAI-PMH 2.0 metadata-harvesting endpoint over the NYCU Dataverse research-data
-    repository ("NYCU Dataverse Dataverse OAI Archive"). Verified with verb=Identify on
-    2026-09-01. Serves Datacite, oai_dc, oai_ddi, oai_datacite and dataverse_json metadata
-    formats, and publishes named sets including all_nycu ("All NYCU datasets"). The baseURL
-    below is the OAI-PMH protocol base URL; per the protocol it requires a verb, and a bare GET
-    on it returns 500 rather than a 400 badVerb error.
+  x-operator-evidence: dataverse.lib.nycu.edu.tw resolves to 140.113.39.17, inside NYCU's own allocation,
+    and the OAI-PMH Identify response names NYCU as the repository with adminEmail cyliu+libdv@lib.nycu.edu.tw.
+    OAI-PMH is an open protocol rather than a vendor contract, so the endpoint is the institution's even
+    though the software serving it is the Dataverse Project's.
+  description: Anonymous OAI-PMH 2.0 metadata-harvesting endpoint over the NYCU Dataverse research-data
+    repository ("NYCU Dataverse Dataverse OAI Archive"). Verified with verb=Identify on 2026-09-01. Serves
+    Datacite, oai_dc, oai_ddi, oai_datacite and dataverse_json metadata formats, and publishes named sets
+    including all_nycu ("All NYCU datasets"). The baseURL below is the OAI-PMH protocol base URL; per
+    the protocol it requires a verb, and a bare GET on it returns 500 rather than a 400 badVerb error.
   humanURL: https://dataverse.lib.nycu.edu.tw/
   baseURL: https://dataverse.lib.nycu.edu.tw/oai
   tags:
@@ -173,15 +167,13 @@ apis:
 - aid: nycu:ir-oai-pmh
   name: NYCU Institutional Repository OAI-PMH Endpoint
   x-operator: institution
-  x-operator-evidence: >-
-    ir.lib.nycu.edu.tw resolves to 140.113.37.243, inside NYCU's own allocation, and the
-    OAI-PMH Identify response names 國立陽明交通大學機構典藏 with adminEmail
-    dspace.ir@lib.nycu.edu.tw and an earliest datestamp of 2014-12-08.
-  description: >-
-    Anonymous OAI-PMH 2.0 harvesting endpoint over the NYCU institutional repository
-    (國立陽明交通大學機構典藏), running back to 2014. Verified with verb=Identify on 2026-09-01.
-    Serves didl, mods, ore, mets, xoai, datacite, dim, rioxx, uketd_dc and qdc metadata formats.
-    The richest genuinely open, machine-readable surface the university operates.
+  x-operator-evidence: ir.lib.nycu.edu.tw resolves to 140.113.37.243, inside NYCU's own allocation, and
+    the OAI-PMH Identify response names 國立陽明交通大學機構典藏 with adminEmail dspace.ir@lib.nycu.edu.tw and an
+    earliest datestamp of 2014-12-08.
+  description: Anonymous OAI-PMH 2.0 harvesting endpoint over the NYCU institutional repository (國立陽明交通大學機構典藏),
+    running back to 2014. Verified with verb=Identify on 2026-09-01. Serves didl, mods, ore, mets, xoai,
+    datacite, dim, rioxx, uketd_dc and qdc metadata formats. The richest genuinely open, machine-readable
+    surface the university operates.
   humanURL: https://ir.lib.nycu.edu.tw/
   baseURL: https://ir.lib.nycu.edu.tw/server/oai/request
   tags:
@@ -197,19 +189,16 @@ apis:
 - aid: nycu:dataverse
   name: NYCU Dataverse (Dataverse Project deployment)
   x-operator: tenant
-  x-operator-evidence: >-
-    The repository is NYCU's — its host, its network, its library's administrators, its DOIs,
-    its 290 datasets. The REST contract is not: /openapi returns the Dataverse Project v5.10.1
-    machine-generated description, identical in shape to every other Dataverse installation.
-    Twenty-three per-tag OpenAPIs split from that document were removed from this repo on
-    2026-09-01 because they credited the Dataverse Project's engineering to NYCU.
-  description: >-
-    NYCU Dataverse, the university library's research-data repository — a self-hosted deployment
-    of Dataverse Project v5.10.1 holding 290 published datasets under DOI prefix 10.57770.
-    Institution-operated data on a third party's contract: the Native and Search REST APIs are
-    Dataverse's, documented in the Dataverse guides, and are recorded here as a relationship
-    rather than as an NYCU interface. The OAI-PMH endpoint over the same repository IS the
-    institution's and is listed separately.
+  x-operator-evidence: 'The repository is NYCU''s — its host, its network, its library''s administrators,
+    its DOIs, its 290 datasets. The REST contract is not: /openapi returns the Dataverse Project v5.10.1
+    machine-generated description, identical in shape to every other Dataverse installation. Twenty-three
+    per-tag OpenAPIs split from that document were removed from this repo on 2026-09-01 because they credited
+    the Dataverse Project''s engineering to NYCU.'
+  description: 'NYCU Dataverse, the university library''s research-data repository — a self-hosted deployment
+    of Dataverse Project v5.10.1 holding 290 published datasets under DOI prefix 10.57770. Institution-operated
+    data on a third party''s contract: the Native and Search REST APIs are Dataverse''s, documented in
+    the Dataverse guides, and are recorded here as a relationship rather than as an NYCU interface. The
+    OAI-PMH endpoint over the same repository IS the institution''s and is listed separately.'
   humanURL: https://dataverse.lib.nycu.edu.tw/
   baseURL: https://dataverse.lib.nycu.edu.tw
   tags:
@@ -224,15 +213,13 @@ apis:
 - aid: nycu:institutional-repository
   name: NYCU Institutional Repository (DSpace deployment)
   x-operator: tenant
-  x-operator-evidence: >-
-    Self-hosted on NYCU's own network at ir.lib.nycu.edu.tw, but /server/api returns
-    "dspaceVersion: DSpace 11.0-SNAPSHOT" and the HAL REST contract is DSpace's, shared by every
-    DSpace 7+ installation. The content and the operation are NYCU's; the interface is not.
-  description: >-
-    國立陽明交通大學機構典藏 — the NYCU institutional repository, a self-hosted DSpace 11
-    deployment with content back to 2014. Its DSpace REST API at /server/api answers anonymous
-    requests, but that contract belongs to DSpace, not to NYCU, so no OpenAPI is saved under this
-    institution. The repository's OAI-PMH endpoint is listed separately as institution-operated.
+  x-operator-evidence: 'Self-hosted on NYCU''s own network at ir.lib.nycu.edu.tw, but /server/api returns
+    "dspaceVersion: DSpace 11.0-SNAPSHOT" and the HAL REST contract is DSpace''s, shared by every DSpace
+    7+ installation. The content and the operation are NYCU''s; the interface is not.'
+  description: 國立陽明交通大學機構典藏 — the NYCU institutional repository, a self-hosted DSpace 11 deployment with
+    content back to 2014. Its DSpace REST API at /server/api answers anonymous requests, but that contract
+    belongs to DSpace, not to NYCU, so no OpenAPI is saved under this institution. The repository's OAI-PMH
+    endpoint is listed separately as institution-operated.
   humanURL: https://ir.lib.nycu.edu.tw/
   baseURL: https://ir.lib.nycu.edu.tw/server/api
   tags:
@@ -245,15 +232,12 @@ apis:
 - aid: nycu:primo
   name: NYCU Library Discovery (Ex Libris Primo tenancy)
   x-operator: tenant
-  x-operator-evidence: >-
-    nycu.primo.exlibrisgroup.com is a CNAME to ap01-a.primo.exlibrisgroup.com — Ex Libris
-    infrastructure, not NYCU's. NYCU's tenancy is identified by the view code
-    886UST_NYCU:886UST_NYCU. The platform, the contract and the hosting are Ex Libris's; the
-    collection and the tenancy are NYCU's.
-  description: >-
-    NYCU's library discovery layer, an Ex Libris Primo tenancy. Recorded as a real institutional
-    relationship. No Ex Libris contract is saved under this institution — Primo's APIs are Ex
-    Libris's product and belong in Ex Libris's own profile.
+  x-operator-evidence: nycu.primo.exlibrisgroup.com is a CNAME to ap01-a.primo.exlibrisgroup.com — Ex
+    Libris infrastructure, not NYCU's. NYCU's tenancy is identified by the view code 886UST_NYCU:886UST_NYCU.
+    The platform, the contract and the hosting are Ex Libris's; the collection and the tenancy are NYCU's.
+  description: NYCU's library discovery layer, an Ex Libris Primo tenancy. Recorded as a real institutional
+    relationship. No Ex Libris contract is saved under this institution — Primo's APIs are Ex Libris's
+    product and belong in Ex Libris's own profile.
   humanURL: https://nycu.primo.exlibrisgroup.com/discovery/search?vid=886UST_NYCU:886UST_NYCU
   baseURL: https://nycu.primo.exlibrisgroup.com
   tags:
@@ -266,18 +250,16 @@ apis:
 - aid: nycu:datacite
   name: DataCite Membership — NYCU Research Data Service
   x-operator: registry
-  x-operator-evidence: >-
-    api.datacite.org/providers/gtfe returns memberType "direct_member", name "National Yang Ming
-    Chiao Tung University", country TW. api.datacite.org/clients/gtfe.kagikv returns the
-    repository client "NYCU Research Data Service", active since 2022, holding prefix 10.57770.
-  description: >-
-    NYCU is a DataCite direct member in its own name — provider gtfe — and operates the DataCite
-    repository client gtfe.kagikv, "NYCU Research Data Service", minting DOIs on prefix 10.57770.
-    A registry membership is a fact about the institution, not a misattributed contract: the
-    membership is recorded, DataCite's own API contract is not saved here. 290 NYCU datasets
-    currently carry 10.57770 DOIs. The DataCite Commons human page rate-limits automated probes
-    (429 on three consecutive attempts, 2026-09-01); it is a bot challenge, not a dead pointer —
-    the two api.datacite.org properties below both return 200.
+  x-operator-evidence: api.datacite.org/providers/gtfe returns memberType "direct_member", name "National
+    Yang Ming Chiao Tung University", country TW. api.datacite.org/clients/gtfe.kagikv returns the repository
+    client "NYCU Research Data Service", active since 2022, holding prefix 10.57770.
+  description: 'NYCU is a DataCite direct member in its own name — provider gtfe — and operates the DataCite
+    repository client gtfe.kagikv, "NYCU Research Data Service", minting DOIs on prefix 10.57770. A registry
+    membership is a fact about the institution, not a misattributed contract: the membership is recorded,
+    DataCite''s own API contract is not saved here. 290 NYCU datasets currently carry 10.57770 DOIs. The
+    DataCite Commons human page rate-limits automated probes (429 on three consecutive attempts, 2026-09-01);
+    it is a bot challenge, not a dead pointer — the two api.datacite.org properties below both return
+    200.'
   humanURL: https://commons.datacite.org/repositories/gtfe.kagikv
   baseURL: https://api.datacite.org
   tags:
@@ -295,14 +277,11 @@ apis:
 - aid: nycu:ror
   name: ROR Registration
   x-operator: registry
-  x-operator-evidence: >-
-    api.ror.org returns https://ror.org/00se2k293 for "National Yang Ming Chiao Tung University",
-    with website https://www.nycu.edu.tw/.
-  description: >-
-    NYCU's entry in the Research Organization Registry, ROR ID 00se2k293 — the canonical
-    machine-readable identifier for the institution as an organization, and the join key most
-    scholarly infrastructure uses to attribute work to it. The registration is recorded; ROR's
-    own API contract is not saved here.
+  x-operator-evidence: api.ror.org returns https://ror.org/00se2k293 for "National Yang Ming Chiao Tung
+    University", with website https://www.nycu.edu.tw/.
+  description: NYCU's entry in the Research Organization Registry, ROR ID 00se2k293 — the canonical machine-readable
+    identifier for the institution as an organization, and the join key most scholarly infrastructure
+    uses to attribute work to it. The registration is recorded; ROR's own API contract is not saved here.
   humanURL: https://ror.org/00se2k293
   baseURL: https://api.ror.org
   tags:
@@ -312,6 +291,16 @@ apis:
   properties:
   - type: Registry
     url: https://api.ror.org/v2/organizations/00se2k293
+- aid: nycu:nycu-profile-api
+  name: National Yang Ming Chiao Tung University Profile API
+  description: Consented NYCU user identity attributes.
+  humanURL: https://id.nycu.edu.tw/docs/
+  baseURL: https://id.nycu.edu.tw
+  tags:
+  - Profile
+  properties:
+  - type: OpenAPI
+    url: openapi/nycu-profile-api-openapi.yml
 common:
 - type: Website
   url: https://www.nycu.edu.tw/nycu/ch/index
@@ -355,24 +344,21 @@ x-coverage:
   state: covered
   reason: covered
   generated: '2026-09-01'
-  detail: >-
-    Re-profiled 2026-09-01 under the university pipeline's operator axis. NYCU operates exactly
-    one contract of its own — the OAuth 2.0 service at id.nycu.edu.tw — plus two anonymous
-    OAI-PMH 2.0 endpoints on its own network. The 23 OpenAPIs previously held here were per-tag
-    splits of ONE document, the Dataverse Project v5.10.1 machine-generated description captured
-    from dataverse.lib.nycu.edu.tw/openapi; they were removed with everything derived from them
-    because they credited the Dataverse Project's engineering to the university. The repository,
-    the DSpace institutional repository and the Ex Libris Primo discovery layer are kept as
-    tenant relationships, and the DataCite and ROR registrations as registry memberships, because
-    those are real facts about the institution even where the contract is not theirs. Hunted and
-    not found: a developer portal (developer.nycu.edu.tw, api.nycu.edu.tw — no DNS), an open-data
-    portal (data.nycu.edu.tw, opendata.nycu.edu.tw — no DNS), a course or timetable API
-    (timetable.nycu.edu.tw and course.nycu.edu.tw are human web applications, the latter behind
-    reCAPTCHA and Big5-encoded), a Shibboleth or SAML IdP (idp./sso./shibboleth.nycu.edu.tw — no
-    DNS; id.nycu.edu.tw/saml/metadata 404), an OAuth/OIDC discovery document (both well-known
-    paths 404), a Crossref membership (0 results), and any ORCID integration. Searched in
-    Traditional Chinese as well as English; the OAuth documentation, terms of service and the
-    university's generative-AI guidelines are all Chinese-first surfaces.
+  detail: 'Re-profiled 2026-09-01 under the university pipeline''s operator axis. NYCU operates exactly
+    one contract of its own — the OAuth 2.0 service at id.nycu.edu.tw — plus two anonymous OAI-PMH 2.0
+    endpoints on its own network. The 23 OpenAPIs previously held here were per-tag splits of ONE document,
+    the Dataverse Project v5.10.1 machine-generated description captured from dataverse.lib.nycu.edu.tw/openapi;
+    they were removed with everything derived from them because they credited the Dataverse Project''s
+    engineering to the university. The repository, the DSpace institutional repository and the Ex Libris
+    Primo discovery layer are kept as tenant relationships, and the DataCite and ROR registrations as
+    registry memberships, because those are real facts about the institution even where the contract is
+    not theirs. Hunted and not found: a developer portal (developer.nycu.edu.tw, api.nycu.edu.tw — no
+    DNS), an open-data portal (data.nycu.edu.tw, opendata.nycu.edu.tw — no DNS), a course or timetable
+    API (timetable.nycu.edu.tw and course.nycu.edu.tw are human web applications, the latter behind reCAPTCHA
+    and Big5-encoded), a Shibboleth or SAML IdP (idp./sso./shibboleth.nycu.edu.tw — no DNS; id.nycu.edu.tw/saml/metadata
+    404), an OAuth/OIDC discovery document (both well-known paths 404), a Crossref membership (0 results),
+    and any ORCID integration. Searched in Traditional Chinese as well as English; the OAuth documentation,
+    terms of service and the university''s generative-AI guidelines are all Chinese-first surfaces.'
   evidence:
   - url: https://id.nycu.edu.tw/docs/
     status: 200
@@ -403,11 +389,11 @@ x-coverage:
   - url: https://api.crossref.org/members?query=Yang+Ming+Chiao+Tung
     status: 200
   - url: https://developer.nycu.edu.tw/
-    status: 000
+    status: 0
   - url: https://data.nycu.edu.tw/
-    status: 000
+    status: 0
   - url: https://idp.nycu.edu.tw/
-    status: 000
+    status: 0
   - url: https://commons.datacite.org/repositories/gtfe.kagikv
     status: 429
   - url: https://www.linkedin.com/school/nycu/
@@ -419,7 +405,7 @@ x-coverage:
   - url: https://course.nycu.edu.tw/
     status: 200
   - url: https://opendata.nycu.edu.tw/
-    status: 000
+    status: 0
 maintainers:
 - FN: Kin Lane
   x-twitter: apievangelist
