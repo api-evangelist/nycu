@@ -55,7 +55,7 @@ tags:
 - Taiwan
 - Identity
 - Authentication
-- Single Sign-On
+- SSO
 - Research Data
 - Institutional Repository
 - Library
@@ -253,6 +253,8 @@ apis:
   humanURL: https://id.nycu.edu.tw/docs/
   baseURL: https://id.nycu.edu.tw
   tags:
+  - Profiles
+  tags_raw:
   - Profile
   properties:
   - type: OpenAPI
@@ -263,6 +265,8 @@ apis:
   humanURL: https://dataverse.lib.nycu.edu.tw/
   baseURL: https://dataverse.lib.nycu.edu.tw/oai
   tags:
+  - Authentication
+  tags_raw:
   - OAuth
   properties:
   - type: OpenAPI
