@@ -1,0 +1,147 @@
+# authorship: written by API Evangelist from conformance probes of NYCU's own live endpoints, 2026-09-01.
+# The `method: probed` below is the pipeline's provenance class for the evidence;
+# `x-method` is the authorship class the repo manifest reads.
+x-method: generated
+specification: API Commons Conformance
+specificationVersion: '0.1'
+provider: National Yang Ming Chiao Tung University
+providerId: nycu
+generated: '2026-09-01'
+method: probed
+x-operator: institution
+regime: education
+description: >-
+  Conformance of National Yang Ming Chiao Tung University's own surfaces against the standards
+  named in the Kin Score `education` regulatory regime. Every entry below is a live probe with a
+  status code and a quoted response fragment; standards NOT evidenced are listed explicitly as
+  not found rather than left out, so an absence reads as a measurement rather than a gap in the
+  survey. Reward-only: nothing here was inferred from a prose claim.
+standards:
+  - standard: oai-pmh
+    conformant: true
+    version: '2.0'
+    evidence:
+      - what: NYCU Dataverse OAI archive answers verb=Identify with protocolVersion 2.0
+        url: https://dataverse.lib.nycu.edu.tw/oai?verb=Identify
+        status: 200
+        location: OAI-PMH/Identify/protocolVersion
+        fragment: >-
+          <repositoryName>NYCU Dataverse Dataverse OAI Archive</repositoryName>
+          <baseURL>https://dataverse.lib.nycu.edu.tw/oai</baseURL>
+          <protocolVersion>2.0</protocolVersion>
+          <adminEmail>cyliu+libdv@lib.nycu.edu.tw</adminEmail>
+      - what: NYCU institutional repository (機構典藏) answers verb=Identify with protocolVersion 2.0
+        url: https://ir.lib.nycu.edu.tw/server/oai/request?verb=Identify
+        status: 200
+        location: OAI-PMH/Identify/protocolVersion
+        fragment: >-
+          <repositoryName>國立陽明交通大學機構典藏</repositoryName>
+          <baseURL>https://ir.lib.nycu.edu.tw/server/oai/request</baseURL>
+          <protocolVersion>2.0</protocolVersion>
+          <adminEmail>dspace.ir@lib.nycu.edu.tw</adminEmail>
+          <earliestDatestamp>2014-12-08T15:01:04Z</earliestDatestamp>
+      - what: Dataverse OAI archive publishes named sets, including an all-institution set
+        url: https://dataverse.lib.nycu.edu.tw/oai?verb=ListSets
+        status: 200
+        location: OAI-PMH/ListSets/set/setSpec
+        fragment: <setSpec>all_nycu</setSpec> — "All NYCU datasets"
+    notes: >-
+      Both endpoints are hosted on NYCU's own registrable domain and resolve inside NYCU's own
+      140.113.0.0/16 allocation. OAI-PMH is an open protocol, not a vendor contract, so the
+      endpoints are recorded as institution-operated even though the software serving them
+      (Dataverse, DSpace) is a third party's.
+  - standard: datacite
+    conformant: true
+    evidence:
+      - what: >-
+          NYCU is a DataCite direct member in its own name — provider gtfe, "National Yang Ming
+          Chiao Tung University", country TW, memberType direct_member
+        url: https://api.datacite.org/providers/gtfe
+        status: 200
+        location: data.attributes.name / .memberType / .country
+        fragment: >-
+          name "National Yang Ming Chiao Tung University", memberType "direct_member",
+          country "TW", website "https://dataverse.lib.nycu.edu.tw"
+      - what: NYCU operates the DataCite repository client "NYCU Research Data Service" (since 2022)
+        url: https://api.datacite.org/clients/gtfe.kagikv
+        status: 200
+        location: data.attributes.name / .clientType / relationships.prefixes
+        fragment: >-
+          id "gtfe.kagikv", symbol "GTFE.KAGIKV", clientType "repository", year 2022,
+          isActive true, prefix 10.57770
+      - what: DOI prefix 10.57770 is minted on live NYCU datasets
+        url: https://dataverse.lib.nycu.edu.tw/api/search?q=*&type=dataset&per_page=3
+        status: 200
+        location: data.items[].global_id
+        fragment: 'doi:10.57770/SYRSQ5 — "NYCU Dataverse", 290 published datasets'
+      - what: Both OAI endpoints serve DataCite metadata formats
+        url: https://dataverse.lib.nycu.edu.tw/oai?verb=ListMetadataFormats
+        status: 200
+        location: OAI-PMH/ListMetadataFormats/metadataFormat/metadataPrefix
+        fragment: Datacite, oai_dc, oai_ddi, oai_datacite, dataverse_json
+  - standard: shibboleth
+    conformant: false
+    evidence:
+      - what: No Shibboleth IdP found on the expected institution hosts
+        url: https://idp.nycu.edu.tw/idp/shibboleth
+        status: 000
+      - what: No SAML metadata served by the identity service
+        url: https://id.nycu.edu.tw/saml/metadata
+        status: 404
+    notes: >-
+      NYCU's first-party identity service is OAuth 2.0, not SAML. Taiwan's academic identity
+      federation does not publish a public metadata query service comparable to InCommon or the
+      UK federation, so a federation membership could not be evidenced either way from outside.
+      Recorded as not-found, not as absent.
+  - standard: saml
+    conformant: false
+    evidence:
+      - url: https://id.nycu.edu.tw/saml/metadata
+        status: 404
+  - standard: crossref
+    conformant: false
+    evidence:
+      - what: No Crossref member matches the institution
+        url: https://api.crossref.org/members?query=Yang+Ming+Chiao+Tung
+        status: 200
+        fragment: total-results 0
+      - url: https://api.crossref.org/members?query=NYCU
+        status: 200
+        fragment: total-results 0
+  - standard: orcid
+    conformant: false
+    notes: >-
+      No ORCID integration evidenced on either repository. Dataset metadata exported from the
+      NYCU Dataverse carries no ORCID author identifiers, and the institutional repository
+      exposes no ORCID login or author-identifier configuration publicly.
+    evidence:
+      - url: https://dataverse.lib.nycu.edu.tw/api/datasets/export?exporter=dataverse_json&persistentId=doi:10.57770/SYRSQ5
+        status: 200
+        fragment: no occurrence of "orcid" in the exported metadata
+not_evidenced:
+  - scim
+  - lti
+  - oneroster
+  - ed-fi
+  - caliper
+  - qti
+other_standards:
+  - standard: RFC 6749 (OAuth 2.0)
+    conformant: true
+    evidence:
+      - what: The university states RFC 6749 conformance and documents the authorization-code flow
+        url: https://id.nycu.edu.tw/docs/
+        status: 200
+        location: developer documentation, opening paragraph
+        fragment: 本平台是依據 OAuth 2.0 (RFC6749) 的標準開發，目前僅開放 Authorization Code 方式來認證。
+      - what: Authorization, token and revocation endpoints all respond as specified
+        url: https://id.nycu.edu.tw/o/token/
+        status: 405
+        fragment: POST-only, per RFC 6749 section 3.2
+  - standard: RFC 8414 (OAuth 2.0 Authorization Server Metadata)
+    conformant: false
+    evidence:
+      - url: https://id.nycu.edu.tw/.well-known/oauth-authorization-server
+        status: 404
+      - url: https://id.nycu.edu.tw/.well-known/openid-configuration
+        status: 404

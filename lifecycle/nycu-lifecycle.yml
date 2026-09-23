@@ -1,0 +1,45 @@
+specification: API Commons Lifecycle
+specificationVersion: '0.1'
+provider: National Yang Ming Chiao Tung University
+providerId: nycu
+generated: '2026-09-01'
+method: searched
+source: https://id.nycu.edu.tw/policy/
+x-operator: institution
+description: >-
+  What National Yang Ming Chiao Tung University commits to about the life of its own OAuth
+  service. There is no versioned API, no changelog, no deprecation policy and no status page;
+  what exists is a dated terms-of-service document with revocation and data-deletion clauses.
+versioning:
+  scheme: none
+  notes: >-
+    The OAuth service exposes no version segment in its paths and publishes no version number.
+    The version recorded on the derived OpenAPI is the last-updated date of the terms of
+    service (2025-10-28), which is the only dated statement the university publishes about the
+    service.
+change_policy:
+  changelog: false
+  deprecation_policy: false
+  notes: >-
+    The terms of service reserve the right to amend the terms and state that amendments will be
+    announced on the service website. No commitment is made about API-surface changes.
+availability:
+  status_page: false
+  sla: false
+  notes: >-
+    The terms of service explicitly disclaim any guarantee of uninterrupted or error-free
+    operation, and disclaim liability for outages from maintenance, network failure or force
+    majeure.
+revocation:
+  user_revocation: true
+  provider_revocation: true
+  notes: >-
+    Users may revoke an application's authorization from the authorization management console,
+    after which the application loses access. NYCU may revoke, suspend or terminate a client on
+    security or misuse grounds. Applications are required to delete a revoking user's
+    authorization data under Taiwan's Personal Data Protection Act (個資法).
+evidence:
+  - url: https://id.nycu.edu.tw/policy/
+    status: 200
+  - url: https://id.nycu.edu.tw/about/
+    status: 200

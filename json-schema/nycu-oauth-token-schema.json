@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/json-schema/nycu-oauth-token-schema.json",
+  "title": "NYCU OAuth Token Response",
+  "description": "The token payload returned by POST https://id.nycu.edu.tw/o/token/ on a successful authorization-code exchange. Shape transcribed from the worked example in the university's own developer documentation at https://id.nycu.edu.tw/docs/.",
+  "x-provenance": {
+    "generated": "2026-09-01",
+    "method": "derived",
+    "source": "https://id.nycu.edu.tw/docs/",
+    "x-operator": "institution"
+  },
+  "type": "object",
+  "properties": {
+    "access_token": { "type": "string", "description": "Bearer token for the /api/* endpoints." },
+    "expires_in": { "type": "integer", "description": "Access-token lifetime in seconds; 36000 in the documented example." },
+    "token_type": { "type": "string", "enum": ["Bearer"] },
+    "scope": { "type": "string", "description": "Space-separated scopes actually granted." },
+    "refresh_token": { "type": "string", "description": "Token for renewing the access token." }
+  },
+  "required": ["access_token", "token_type"],
+  "additionalProperties": true
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/json-schema/nycu-oauth-profile-schema.json",
+  "title": "NYCU OAuth Profile",
+  "description": "The consented user identity returned by GET https://id.nycu.edu.tw/api/profile/ under the `profile` scope of the NYCU OAuth service. Shape transcribed from the university's own developer documentation at https://id.nycu.edu.tw/docs/.",
+  "x-provenance": {
+    "generated": "2026-09-01",
+    "method": "derived",
+    "source": "https://id.nycu.edu.tw/docs/",
+    "x-operator": "institution"
+  },
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "description": "NYCU single sign-on account name (student or staff identifier)."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "NYCU email address of the consented user."
+    }
+  },
+  "required": ["username", "email"],
+  "additionalProperties": true
+}

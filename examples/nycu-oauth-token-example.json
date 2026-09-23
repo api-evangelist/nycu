@@ -1,0 +1,30 @@
+{
+  "x-provenance": {
+    "generated": "2026-09-01",
+    "method": "derived",
+    "source": "https://id.nycu.edu.tw/docs/",
+    "note": "Transcribed verbatim from the worked cURL example in NYCU's own OAuth developer documentation. Placeholder credential strings are NYCU's own placeholders, not real tokens."
+  },
+  "request": {
+    "method": "POST",
+    "url": "https://id.nycu.edu.tw/o/token/",
+    "headers": { "Content-Type": "application/x-www-form-urlencoded" },
+    "body": {
+      "grant_type": "authorization_code",
+      "code": "AUTHORIZATION_CODE",
+      "redirect_uri": "YOUR_REDIRECT_URI",
+      "client_id": "YOUR_CLIENT_ID",
+      "client_secret": "YOUR_CLIENT_SECRET"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "access_token": "ACCESS_TOKEN",
+      "expires_in": 36000,
+      "token_type": "Bearer",
+      "scope": "profile email",
+      "refresh_token": "REFRESH_TOKEN"
+    }
+  }
+}

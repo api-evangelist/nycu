@@ -4,7 +4,7 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: National Yang Ming Chiao Tung University
 providerId: nycu
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-09-01'
 reconciled: false
 tags:
 - Education
@@ -12,11 +12,15 @@ tags:
 - University
 - Rate Limiting
 description: >-
-  National Yang Ming Chiao Tung University does not publish a unified public rate-limit table across its APIs. Open
-  metadata and harvesting endpoints (OAI-PMH, IIIF, library) may throttle large-scale
-  or automated harvesting; clients should harvest politely, honor Retry-After, and
-  contact the relevant service for bulk access.
-notes: Confirm per-service limits with each API's documentation; harvest responsibly.
+  National Yang Ming Chiao Tung University publishes no rate-limit table for any of its surfaces,
+  and neither the OAuth documentation nor the terms of service mention throttling. The two
+  OAI-PMH endpoints may throttle large harvests; both advertise gzip/deflate compression and the
+  NYCU Dataverse robots.txt disallows all crawling, so harvest through the OAI-PMH protocol rather
+  than by crawling the web UI. Corrected 2026-09-01 — the previous description named IIIF and
+  library endpoints that were never measured on this institution.
+notes: >-
+  No published limit was found on any NYCU surface. Confirm per-service limits with each
+  service; harvest responsibly. dataverse.lib.nycu.edu.tw/robots.txt is User-agent * / Disallow /.
 sources:
 - https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/apis.yml
 responseCodes:

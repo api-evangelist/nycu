@@ -1,0 +1,76 @@
+# NYCU — Spectral ruleset for the university's own OpenAPI artifacts.
+# generated: '2026-09-01'
+# method: generated
+# source: openapi/nycu-oauth-api-openapi.yml
+# x-operator: institution
+#
+# Scope note: this ruleset governs the ONE contract National Yang Ming Chiao Tung University
+# itself operates — the NYCU OAuth service. It deliberately does not govern the Dataverse or
+# DSpace deployments the university runs, because those contracts belong to their software
+# projects, not to NYCU.
+extends: []
+formats:
+  - oas3
+documentationUrl: https://github.com/api-evangelist/nycu
+rules:
+  nycu-info-block:
+    description: API must declare a title, description and version.
+    severity: warn
+    given: $.info
+    then:
+      - field: title
+        function: truthy
+      - field: description
+        function: truthy
+      - field: version
+        function: truthy
+  nycu-declares-operator:
+    description: >-
+      Every contract in a university repo must declare who operates the thing it describes.
+      A university is a federation of buyers; an undeclared operator is how a vendor's contract
+      gets credited to an institution.
+    severity: error
+    given: $.info
+    then:
+      field: x-operator
+      function: truthy
+  nycu-server-is-institution-host:
+    description: >-
+      Servers must point at a host under the university's own registrable domain over HTTPS.
+      A contract served from a vendor host does not belong in this repo.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://[a-z0-9.-]*nycu\\.edu\\.tw"
+  nycu-terms-of-service:
+    description: A first-party institutional API should link its terms of service.
+    severity: warn
+    given: $.info
+    then:
+      field: termsOfService
+      function: truthy
+  nycu-contact-is-institutional:
+    description: The contact address must be at the university, not at a software vendor.
+    severity: error
+    given: $.info.contact.email
+    then:
+      function: pattern
+      functionOptions:
+        match: "@([a-z0-9.-]*\\.)?nycu\\.edu\\.tw$"
+  nycu-operation-ids:
+    description: Every operation needs an operationId.
+    severity: warn
+    given: $.paths[*][get,put,post,delete,patch]
+    then:
+      field: operationId
+      function: truthy
+  nycu-scopes-documented:
+    description: >-
+      OAuth scopes must carry a description, because NYCU gates two of its three scopes behind
+      an institutional approval process and a caller needs to know which.
+    severity: warn
+    given: $.components.securitySchemes[?(@.type=='oauth2')].flows.authorizationCode.scopes
+    then:
+      function: truthy

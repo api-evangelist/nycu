@@ -1,0 +1,63 @@
+specification: API Commons Authentication
+specificationVersion: '0.1'
+provider: National Yang Ming Chiao Tung University
+providerId: nycu
+generated: '2026-09-01'
+method: searched
+source: https://id.nycu.edu.tw/docs/
+x-operator: institution
+description: >-
+  How authentication works against the surfaces National Yang Ming Chiao Tung University
+  actually operates. The university runs one first-party authorization server — the NYCU OAuth
+  service at id.nycu.edu.tw, operated by the Information Technology Service Center — and it
+  fronts the university single sign-on account. Everything else NYCU exposes publicly is either
+  anonymous read (OAI-PMH harvesting, the DSpace and Dataverse read APIs) or is gated behind
+  that same SSO.
+schemes:
+  - name: NYCU OAuth 2.0 authorization code
+    type: oauth2
+    flow: authorization_code
+    standard: RFC 6749
+    surface: https://id.nycu.edu.tw
+    authorization_url: https://id.nycu.edu.tw/o/authorize/
+    token_url: https://id.nycu.edu.tw/o/token/
+    revocation_url: https://id.nycu.edu.tw/o/revoke_token/
+    registration_url: https://id.nycu.edu.tw/apply/app
+    token_placement: Authorization Bearer header
+    client_types: [public, confidential]
+    grants_offered: [authorization_code, refresh_token]
+    grants_not_offered: [implicit, password, client_credentials]
+    notes: >-
+      Only the authorization-code grant is offered for user authentication; the terms of service
+      additionally name refresh tokens. Redirect URIs are a per-client whitelist. The terms of
+      service require client implementations to use HTTPS, PKCE and CSRF protection, but PKCE is
+      not enforced or advertised as a server capability in the published documentation.
+    evidence:
+      - url: https://id.nycu.edu.tw/docs/
+        status: 200
+      - url: https://id.nycu.edu.tw/policy/
+        status: 200
+  - name: Anonymous read
+    type: none
+    surface: https://dataverse.lib.nycu.edu.tw/oai
+    notes: >-
+      The OAI-PMH endpoints on both the NYCU Dataverse and the NYCU institutional repository
+      answer unauthenticated GET requests. Verified with verb=Identify.
+    evidence:
+      - url: https://dataverse.lib.nycu.edu.tw/oai?verb=Identify
+        status: 200
+      - url: https://ir.lib.nycu.edu.tw/server/oai/request?verb=Identify
+        status: 200
+discovery:
+  openid_connect: false
+  oauth_authorization_server_metadata: false
+  notes: >-
+    NYCU serves no discovery document. https://id.nycu.edu.tw/.well-known/openid-configuration
+    and https://id.nycu.edu.tw/.well-known/oauth-authorization-server both return 404, probed
+    2026-09-01. This is OAuth 2.0 only, not OpenID Connect. It is the single largest machine
+    -readability gap on the university's own identity surface.
+  evidence:
+    - url: https://id.nycu.edu.tw/.well-known/openid-configuration
+      status: 404
+    - url: https://id.nycu.edu.tw/.well-known/oauth-authorization-server
+      status: 404

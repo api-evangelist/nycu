@@ -1,0 +1,42 @@
+specification: API Commons Scopes
+specificationVersion: '0.1'
+provider: National Yang Ming Chiao Tung University
+providerId: nycu
+generated: '2026-09-01'
+method: searched
+source: https://id.nycu.edu.tw/docs/
+x-operator: institution
+description: >-
+  The three scopes published by the NYCU OAuth service. NYCU splits them into non-sensitive
+  (非機敏) and sensitive (機敏): any registered developer may request `profile`, while `name`
+  and `status` must be justified on an in-console application form and approved by the
+  Information Technology Service Center. The terms of service state that, in principle, only
+  systems developed or operated by the university are granted the sensitive scopes.
+scopes:
+  - name: profile
+    resource: Email, account name
+    endpoint: https://id.nycu.edu.tw/api/profile/
+    sensitivity: non-sensitive
+    approval_required: false
+  - name: name
+    resource: User's personal name, account name
+    endpoint: https://id.nycu.edu.tw/api/name/
+    sensitivity: sensitive
+    approval_required: true
+  - name: status
+    resource: Enrollment/employment status, account name
+    endpoint: https://id.nycu.edu.tw/api/status/
+    sensitivity: sensitive
+    approval_required: true
+approval:
+  process_url: https://id.nycu.edu.tw/apply/app
+  authority: NYCU Information Technology Service Center (資訊技術服務中心)
+  description: >-
+    Requested on the application's management page, stating the fields needed, the purpose, the
+    responsible unit and a contact. NYCU reserves the right to revoke, suspend or terminate a
+    client on security or misuse grounds.
+evidence:
+  - url: https://id.nycu.edu.tw/docs/
+    status: 200
+  - url: https://id.nycu.edu.tw/policy/
+    status: 200

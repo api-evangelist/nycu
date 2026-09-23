@@ -1,0 +1,191 @@
+openapi: 3.2.0
+info:
+  title: NYCU O Auth API
+  description: The National Yang Ming Chiao Tung University (NYCU) OAuth service — the university's own OAuth 2.0 (RFC 6749) authorization server, operated by the NYCU Information Technology Service Center (資訊技術服務中心) at https://id.nycu.edu.tw.
+  version: '2025-10-28'
+  contact:
+    name: NYCU OAuth administrators, Information Technology Service Center
+    email: oibi@nycu.edu.tw
+    url: https://id.nycu.edu.tw/docs/
+  termsOfService: https://id.nycu.edu.tw/policy/
+  x-operator: institution
+  x-operator-evidence: id.nycu.edu.tw resolves to 140.113.199.41, inside NYCU's own 140.113.0.0/16 allocation; the service, its documentation, its terms of service and its issue tracker (github.com/NYCU-OAuth) are all published by the university itself.
+  x-provenance:
+    method: derived
+    source: https://id.nycu.edu.tw/docs/
+    generated: '2026-09-01'
+servers:
+- url: https://id.nycu.edu.tw
+  description: NYCU OAuth production authorization server.
+tags:
+- name: OAuth
+  description: OAuth 2.0 authorization-code endpoints.
+paths:
+  /o/authorize/:
+    get:
+      tags:
+      - OAuth
+      operationId: authorize
+      summary: Begin the authorization-code flow
+      description: Redirects the end user to the NYCU single sign-on login and consent screen. On approval the browser is redirected back to the registered redirect URI with `code` and `state` query parameters.
+      parameters:
+      - name: response_type
+        in: query
+        required: true
+        description: Must be `code`; the authorization-code grant is the only grant offered.
+        schema:
+          type: string
+          enum:
+          - code
+      - name: client_id
+        in: query
+        required: true
+        description: Client ID issued when the application was registered at /apply/app.
+        schema:
+          type: string
+      - name: redirect_uri
+        in: query
+        required: true
+        description: Redirect URI to return the user to. Must exactly match one of the URIs whitelisted on the registered client.
+        schema:
+          type: string
+          format: uri
+      - name: scope
+        in: query
+        required: true
+        description: Space-separated scopes. `profile` is open to any registered developer; `name` and `status` are sensitive and require prior approval.
+        schema:
+          type: string
+          example: profile name
+      - name: state
+        in: query
+        required: false
+        description: Opaque random string echoed back on redirect; used for CSRF protection.
+        schema:
+          type: string
+      responses:
+        '302':
+          description: Redirect to the NYCU login/consent screen, and afterwards to the registered redirect URI carrying `code` and `state`.
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+        '400':
+          description: Invalid client, redirect URI or scope.
+  /o/token/:
+    post:
+      tags:
+      - OAuth
+      operationId: token
+      summary: Exchange an authorization code for an access token
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+      responses:
+        '200':
+          description: Access token issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+              example:
+                access_token: ACCESS_TOKEN
+                expires_in: 36000
+                token_type: Bearer
+                scope: profile email
+                refresh_token: REFRESH_TOKEN
+        '400':
+          description: Invalid grant, code, redirect URI or client credentials.
+  /o/revoke_token/:
+    post:
+      tags:
+      - OAuth
+      operationId: revokeToken
+      summary: Revoke an access or refresh token
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RevokeRequest'
+      responses:
+        '200':
+          description: Token revoked. The response body is empty.
+        '400':
+          description: Invalid token or client credentials.
+components:
+  schemas:
+    TokenRequest:
+      type: object
+      required:
+      - grant_type
+      - code
+      - redirect_uri
+      - client_id
+      - client_secret
+      properties:
+        grant_type:
+          type: string
+          enum:
+          - authorization_code
+          - refresh_token
+          description: '`authorization_code` to exchange a fresh code; `refresh_token` to renew, which the terms of service list as a supported flow.'
+        code:
+          type: string
+          description: The authorization code returned to the redirect URI.
+        redirect_uri:
+          type: string
+          format: uri
+          description: The same redirect URI used in the authorization request.
+        client_id:
+          type: string
+        client_secret:
+          type: string
+    RevokeRequest:
+      type: object
+      required:
+      - token
+      - client_id
+      properties:
+        token:
+          type: string
+          description: The access token or refresh token to revoke.
+        client_id:
+          type: string
+        client_secret:
+          type: string
+          description: Required for confidential clients.
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+          description: Access-token lifetime in seconds (36000 in the documented example).
+        token_type:
+          type: string
+          enum:
+          - Bearer
+        scope:
+          type: string
+          description: Space-separated scopes actually granted.
+        refresh_token:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: NYCU OAuth 2.0 (RFC 6749) authorization code grant. Clients register at https://id.nycu.edu.tw/apply/app. The terms of service require HTTPS, PKCE and CSRF protection in client implementations.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://id.nycu.edu.tw/o/authorize/
+          tokenUrl: https://id.nycu.edu.tw/o/token/
+          refreshUrl: https://id.nycu.edu.tw/o/token/
+          scopes:
+            profile: Account name and NYCU email address. Non-sensitive; open to registered developers.
+            name: The user's personal name. Sensitive; requires approval.
+            status: The user's enrollment or employment status. Sensitive; requires approval.

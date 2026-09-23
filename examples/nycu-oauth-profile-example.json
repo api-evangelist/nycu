@@ -1,0 +1,19 @@
+{
+  "x-provenance": {
+    "generated": "2026-09-01",
+    "method": "derived",
+    "source": "https://id.nycu.edu.tw/docs/"
+  },
+  "request": {
+    "method": "GET",
+    "url": "https://id.nycu.edu.tw/api/profile/",
+    "headers": { "Authorization": "Bearer ACCESS_TOKEN" }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "username": "testuser",
+      "email": "test@nycu.edu.tw"
+    }
+  }
+}

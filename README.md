@@ -64,48 +64,113 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-National Yang Ming Chiao Tung University (NYCU) is a public research university in Taiwan, formed in 2021 from the merger of National Yang-Ming University and National Chiao Tung University, and ranked #219 in the QS World University Rankings 2025. This repository catalogs NYCU's public developer and API footprint as an [APIs.json](https://apisjson.org) profile.
+National Yang Ming Chiao Tung University (NYCU) is a public research university in Hsinchu and Taipei, Taiwan, formed in 2021 from the merger of National Yang-Ming University and National Chiao Tung University. This repository catalogs NYCU's public developer and API footprint as an [APIs.json](https://apisjson.org) profile.
 
 - APIs.json: <https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/apis.yml>
 - Run with Naftiko: <https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=nycu-api-evangelist&utm_content=repo>
 
 ## Type
 
-- **Type:** Index
+- **Type:** Index (`x-type: university`, `x-category: Public Research University`)
 - **Position:** Consumer
 - **Access:** 3rd-Party
 
 ## Tags
 
-Education, Higher Education, University, Taiwan, Identity, OAuth, Research Data, Open Data, Library
+Education, Higher Education, University, Taiwan, Identity, Authentication, Single Sign-On, Research Data, Institutional Repository, Library, Metadata
 
-## APIs
+## Who operates what
 
-- **NYCU OAuth / Single Sign-On API** — OAuth 2.0 (RFC 6749) authorization-code service for third-party apps to authenticate NYCU users and retrieve consented data (profile / name / status scopes). Docs: <https://id.nycu.edu.tw/docs/> · Register an app: <https://id.nycu.edu.tw/apply/app>
-- **NYCU Dataverse Repository API** — Standard Dataverse Project (v5.10.1) Native and Search REST APIs over the NYCU research-data repository. Base: `https://dataverse.lib.nycu.edu.tw/api` · Docs: <https://guides.dataverse.org/en/5.10.1/api/>
-- **NYCU Dataverse OAI-PMH Endpoint** — OAI-PMH 2.0 metadata-harvesting endpoint for the research-data repository. Base: `https://dataverse.lib.nycu.edu.tw/oai`
+A university is a federation of buyers, not a producer, so every surface below carries an
+`x-operator` saying who runs the thing it describes — which is rarely the same answer as who the
+data belongs to.
 
-## Plans / Rate Limits / FinOps
+### Institution-operated
 
+- **NYCU OAuth API** — the university's own OAuth 2.0 (RFC 6749) authorization server, run by the
+  Information Technology Service Center. Six documented endpoints; the `profile` scope is open to
+  registered developers, `name` and `status` require institutional approval. This is the one
+  contract in this repo NYCU actually engineered. Docs: <https://id.nycu.edu.tw/docs/> · Register:
+  <https://id.nycu.edu.tw/apply/app> · Terms: <https://id.nycu.edu.tw/policy/> · OpenAPI:
+  [openapi/nycu-oauth-api-openapi.yml](openapi/nycu-oauth-api-openapi.yml) (derived from NYCU's own
+  documentation — NYCU publishes no machine-readable description and no discovery document).
+- **NYCU Dataverse OAI-PMH endpoint** — `https://dataverse.lib.nycu.edu.tw/oai`, verified with
+  `verb=Identify`.
+- **NYCU institutional repository OAI-PMH endpoint** — `https://ir.lib.nycu.edu.tw/server/oai/request`,
+  content back to 2014, verified with `verb=Identify`.
+
+### Tenant relationships (real institutional facts; the contract is not NYCU's)
+
+- **NYCU Dataverse** — a self-hosted Dataverse Project v5.10.1 deployment, 290 datasets on DOI
+  prefix 10.57770. The REST contract is the Dataverse Project's.
+- **NYCU institutional repository (機構典藏)** — a self-hosted DSpace 11 deployment. The REST
+  contract is DSpace's.
+- **NYCU library discovery** — an Ex Libris Primo tenancy, view code `886UST_NYCU`.
+
+### Registry memberships
+
+- **DataCite** — NYCU is a direct member in its own name (provider `gtfe`) and operates the
+  repository client `gtfe.kagikv`, "NYCU Research Data Service", prefix 10.57770.
+- **ROR** — <https://ror.org/00se2k293>.
+
+## Artifacts
+
+- OpenAPI: [openapi/nycu-oauth-api-openapi.yml](openapi/nycu-oauth-api-openapi.yml) · pristine copy in [openapi/_original/](openapi/_original/)
+- Authentication: [authentication/nycu-authentication.yml](authentication/nycu-authentication.yml)
+- Scopes: [scopes/nycu-scopes.yml](scopes/nycu-scopes.yml)
+- Errors: [errors/nycu-errors.yml](errors/nycu-errors.yml)
+- Lifecycle: [lifecycle/nycu-lifecycle.yml](lifecycle/nycu-lifecycle.yml)
+- Conformance: [conformance/nycu-conformance.yml](conformance/nycu-conformance.yml)
+- Rules: [rules/nycu-rules.yml](rules/nycu-rules.yml)
+- JSON Schema: [json-schema/](json-schema/) · Examples: [examples/](examples/)
 - Plans & Pricing: [plans/nycu-plans-pricing.yml](plans/nycu-plans-pricing.yml)
 - Rate Limits: [rate-limits/nycu-rate-limits.yml](rate-limits/nycu-rate-limits.yml)
 - FinOps: [finops/nycu-finops.yml](finops/nycu-finops.yml)
+- Provenance manifest: [provenance.yml](provenance.yml)
 
 ## Timestamps
 
 - Created: 2026-06-03
-- Modified: 2026-06-03
+- Modified: 2026-09-01
 
 ## Common Properties
 
-- Website: <https://www.nycu.edu.tw/>
+- Website: <https://www.nycu.edu.tw/nycu/en/index>
 - Developer Portal: <https://id.nycu.edu.tw/docs/>
+- GitHub: <https://github.com/NYCU-OAuth> · Support: <https://github.com/NYCU-OAuth/issue-report>
+- AI policy: NYCU's generative-AI statement and guidelines, Office of Academic Ethics and Research Integrity
 - LinkedIn: <https://www.linkedin.com/school/nycu/>
 - Review: [review.yml](review.yml)
 
+## Correction, 2026-09-01
+
+This profile previously held **23 OpenAPIs** attributed to NYCU. They were per-tag splits of **one
+document** — the Dataverse Project v5.10.1 machine-generated description captured from
+`dataverse.lib.nycu.edu.tw/openapi` — and they credited the Dataverse Project's engineering to the
+university. All 23, the pristine original, 47 derived collections and every derived schema,
+structure, example, ruleset, vocabulary, JSON-LD context, capability map and agentic-access file
+were removed. The repository, the DSpace deployment and the Primo tenancy are kept as **tenant
+relationships**, and the DataCite and ROR registrations as **registry memberships**, because those
+are real facts about the institution even where the contract is not theirs. The apis.yml entries
+also pointed all 23 Dataverse specs at `https://id.nycu.edu.tw` — the SSO host, not the repository
+host — which was a second, separate defect.
+
+**This correction lowers NYCU's score, and that is the pipeline working.** What remains is smaller
+and true.
+
 ## Notes
 
-All cataloged APIs were verified live on 2026-06-03. The OAuth service docs and authorization endpoint, the Dataverse `api/info/version` endpoint (returning v5.10.1), and the OAI-PMH `verb=Identify` endpoint all returned HTTP 200. No official institution-wide GitHub organization was found — only individual research-lab orgs (e.g. ARG-NCTU, NYCU-NLP-Lab) — so none is listed. Course/timetable/SIS and campus-portal systems are gated behind institutional SSO and are not openly documented. The official website returns 403 and the LinkedIn page returns 999 to automated clients; both are standard bot-blocking responses and the sites exist. No endpoints were fabricated.
+Hunted and not found on 2026-09-01: a developer portal (`developer.nycu.edu.tw`, `api.nycu.edu.tw` —
+no DNS), an open-data portal (`data.nycu.edu.tw`, `opendata.nycu.edu.tw` — no DNS), a course or
+timetable API (`timetable.nycu.edu.tw` and `course.nycu.edu.tw` are human web applications, the
+latter behind reCAPTCHA and Big5-encoded), a Shibboleth or SAML IdP (`idp.`/`sso.`/`shibboleth.nycu.edu.tw`
+— no DNS; `id.nycu.edu.tw/saml/metadata` 404), an OAuth or OpenID Connect discovery document (both
+well-known paths 404), a Crossref membership (0 results), and any ORCID integration. No official
+institution-wide GitHub organization exists — only research-lab orgs — but `github.com/NYCU-OAuth`
+is the OAuth service's own org and is listed. Searched in Traditional Chinese as well as English;
+the OAuth documentation, the terms of service and the university's generative-AI guidelines are all
+Chinese-first surfaces. The LinkedIn page returns 999 and DataCite Commons returns 429 to automated
+clients; both are bot challenges, not dead links. No endpoints were fabricated.
 
 ## Maintainers
 

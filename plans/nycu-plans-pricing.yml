@@ -4,7 +4,7 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: National Yang Ming Chiao Tung University
 providerId: nycu
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-09-01'
 reconciled: false
 tags:
 - Education
@@ -12,11 +12,15 @@ tags:
 - University
 - Plans
 description: >-
-  National Yang Ming Chiao Tung University is a non-commercial higher-education institution; its APIs are not sold
-  as a commercial product. Public APIs (library, repository, course, and open-metadata
-  interfaces) are offered free of charge, typically for non-commercial use. Most
-  administrative and identity APIs are not openly self-service and require institutional
-  affiliation, credentials, or federation membership rather than a paid plan.
+  National Yang Ming Chiao Tung University is a non-commercial higher-education institution; its
+  APIs are not sold as a commercial product and there is no published pricing of any kind. The
+  two anonymous OAI-PMH harvesting endpoints (NYCU Dataverse, NYCU institutional repository) are
+  open at no charge. The university's own OAuth service is free but not self-service: a client
+  must be registered, and the two sensitive scopes must be approved by the Information Technology
+  Service Center, which in principle grants them only to systems the university develops or
+  operates. Course, timetable and administrative systems are behind institutional SSO and are not
+  APIs. Corrected 2026-09-01 — the previous description named library, course and IIIF interfaces
+  that were never measured on this institution.
 notes: >-
   No published per-seat or per-call commercial pricing. "Free / Open" reflects open
   public endpoints; "Affiliation / Credentialed" reflects access gated by institutional
@@ -27,7 +31,7 @@ plans:
 - id: nycu-free-open
   name: Free / Open
   type: free
-  description: Public open APIs (metadata, library, repository, course data) offered at no charge, generally for non-commercial use.
+  description: The two OAI-PMH metadata-harvesting endpoints, open and anonymous at no charge.
   entries:
   - label: Open API Access
     name: open_api_access
@@ -42,7 +46,7 @@ plans:
 - id: nycu-affiliation
   name: Affiliation / Credentialed
   type: free
-  description: Administrative and identity APIs gated behind institutional SSO, client certificates, or federation membership rather than payment.
+  description: The NYCU OAuth service — free, but gated behind client registration and, for the name and status scopes, institutional approval rather than payment.
   entries:
   - label: Credentialed Access
     name: credentialed_access

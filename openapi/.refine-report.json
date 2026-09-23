@@ -1,0 +1,25 @@
+{
+  "provider": "nycu",
+  "sources": [
+    "_original/nycu-oauth-api.yaml"
+  ],
+  "outputs": [
+    "nycu-oauth-api-openapi.yml",
+    "nycu-profile-api-openapi.yml"
+  ],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "nycu-oauth-api.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "superseded outputs removed: nycu-o-auth-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 9 total)"
+  ],
+  "skipped": [
+    "nycu-o-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nycu-profile-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

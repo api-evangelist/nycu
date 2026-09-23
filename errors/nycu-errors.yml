@@ -1,0 +1,47 @@
+# authorship: written by API Evangelist from live error probes of NYCU's own live endpoints, 2026-09-01.
+# The `method: probed` below is the pipeline's provenance class for the evidence;
+# `x-method` is the authorship class the repo manifest reads.
+x-method: generated
+specification: API Commons Errors
+specificationVersion: '0.1'
+provider: National Yang Ming Chiao Tung University
+providerId: nycu
+generated: '2026-09-01'
+method: probed
+source: https://id.nycu.edu.tw/
+x-operator: institution
+description: >-
+  NYCU publishes no error reference for its OAuth service. This file records what the live
+  endpoints actually return, probed 2026-09-01, rather than what a template would predict. The
+  finding worth naming is that the resource endpoints answer an unauthenticated request with a
+  Django HTTP 500 page rather than the RFC 6750 401 with a WWW-Authenticate header — a real
+  defect on an otherwise well-run first-party identity service.
+observed:
+  - request: GET https://id.nycu.edu.tw/api/profile/ (no Authorization header)
+    status: 500
+    body: Django "Server Error (500)" HTML page, no machine-readable error body
+    expected: 401 with WWW-Authenticate; Bearer
+  - request: GET https://id.nycu.edu.tw/api/name/ (no Authorization header)
+    status: 500
+    body: Django "Server Error (500)" HTML page
+    expected: 401 with WWW-Authenticate; Bearer
+  - request: GET https://id.nycu.edu.tw/api/status/ (no Authorization header)
+    status: 500
+    body: Django "Server Error (500)" HTML page
+    expected: 401 with WWW-Authenticate; Bearer
+  - request: GET https://id.nycu.edu.tw/o/token/
+    status: 405
+    body: Method not allowed; the endpoint is POST only, which is correct
+  - request: GET https://id.nycu.edu.tw/o/revoke_token/
+    status: 405
+    body: Method not allowed; POST only, which is correct
+  - request: GET https://id.nycu.edu.tw/o/authorize/ (unauthenticated browser)
+    status: 200 after redirect to /accounts/login/?next=/o/authorize/
+    body: SSO login page, which is the correct authorization-code behaviour
+documented_error_reference: false
+notes: >-
+  Standard RFC 6749 token-endpoint error codes (invalid_request, invalid_client, invalid_grant,
+  unauthorized_client, unsupported_grant_type, invalid_scope) are assumed to apply because the
+  service declares RFC 6749 conformance, but NYCU does not enumerate them and they were not
+  probed — issuing a bad token request would require a registered client. They are deliberately
+  NOT recorded above as observed behaviour.
