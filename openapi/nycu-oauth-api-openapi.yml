@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: NYCU O Auth API
+  title: NYCU OAuth API
   description: The National Yang Ming Chiao Tung University (NYCU) OAuth service — the university's own OAuth 2.0 (RFC 6749) authorization server, operated by the NYCU Information Technology Service Center (資訊技術服務中心) at https://id.nycu.edu.tw.
   version: '2025-10-28'
   contact:

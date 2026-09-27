@@ -89,16 +89,6 @@ paths:
           description: The token does not carry the approved `status` scope.
 components:
   schemas:
-    Profile:
-      type: object
-      properties:
-        username:
-          type: string
-          description: NYCU single sign-on account name (student or staff ID).
-        email:
-          type: string
-          format: email
-          description: NYCU email address.
     Status:
       type: object
       properties:
@@ -115,6 +105,16 @@ components:
         name:
           type: string
           description: The user's personal name.
+    Profile:
+      type: object
+      properties:
+        username:
+          type: string
+          description: NYCU single sign-on account name (student or staff ID).
+        email:
+          type: string
+          format: email
+          description: NYCU email address.
   securitySchemes:
     oauth2:
       type: oauth2
