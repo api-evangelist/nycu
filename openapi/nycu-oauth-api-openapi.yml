@@ -119,6 +119,20 @@ paths:
           description: Invalid token or client credentials.
 components:
   schemas:
+    RevokeRequest:
+      type: object
+      required:
+      - token
+      - client_id
+      properties:
+        token:
+          type: string
+          description: The access token or refresh token to revoke.
+        client_id:
+          type: string
+        client_secret:
+          type: string
+          description: Required for confidential clients.
     TokenRequest:
       type: object
       required:
@@ -145,20 +159,6 @@ components:
           type: string
         client_secret:
           type: string
-    RevokeRequest:
-      type: object
-      required:
-      - token
-      - client_id
-      properties:
-        token:
-          type: string
-          description: The access token or refresh token to revoke.
-        client_id:
-          type: string
-        client_secret:
-          type: string
-          description: Required for confidential clients.
     TokenResponse:
       type: object
       properties:
