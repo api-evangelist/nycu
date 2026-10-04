@@ -89,14 +89,14 @@ paths:
           description: The token does not carry the approved `status` scope.
 components:
   schemas:
-    Status:
+    Name:
       type: object
       properties:
         username:
           type: string
-        status:
+        name:
           type: string
-          description: Enrollment (在學) or employment (在職) status.
+          description: The user's personal name.
     Profile:
       type: object
       properties:
@@ -107,14 +107,14 @@ components:
           type: string
           format: email
           description: NYCU email address.
-    Name:
+    Status:
       type: object
       properties:
         username:
           type: string
-        name:
+        status:
           type: string
-          description: The user's personal name.
+          description: Enrollment (在學) or employment (在職) status.
   securitySchemes:
     oauth2:
       type: oauth2
