@@ -1,4 +1,4 @@
-# National Yang Ming Chiao Tung University (nycu)
+# National Yang Ming Chiao Tung University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,114 +64,193 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-National Yang Ming Chiao Tung University (NYCU) is a public research university in Hsinchu and Taipei, Taiwan, formed in 2021 from the merger of National Yang-Ming University and National Chiao Tung University. This repository catalogs NYCU's public developer and API footprint as an [APIs.json](https://apisjson.org) profile.
+National Yang Ming Chiao Tung University (NYCU) is a public research university in Hsinchu and Taipei, Taiwan, formed in 2021 from the merger of National Yang-Ming University and National Chiao Tung University. Its programmable footprint is small but genuinely its own in one place: the NYCU OAuth service at id.nycu.edu.tw, an OAuth 2.0 (RFC 6749) authorization server run by the university's Information Technology Service Center that lets approved applications authenticate NYCU single sign-on users and read three consented identity attributes. It is documented publicly, in Chinese and English, with its own terms of service and issue tracker, and it is the only contract in this repo NYCU actually engineered. Everything else is a relationship rather than an interface the university wrote. NYCU self-hosts a Dataverse research-data repository and a DSpace institutional repository on its own network, and both expose an anonymous OAI-PMH 2.0 harvesting endpoint that is institution-operated — but the REST contracts underneath them belong to the Dataverse Project and DSpace, not to NYCU. Library discovery is an Ex Libris Primo tenancy. NYCU is a DataCite direct member in its own name, minting DOIs on prefix 10.57770 through its "NYCU Research Data Service" repository, and is registered in ROR. There is no central developer portal, no open-data portal, no course or timetable API, no OpenID Connect discovery document, and no publicly discoverable Shibboleth or SAML identity provider. The course registration and timetable systems are human web applications behind institutional login.
 
-- APIs.json: <https://raw.githubusercontent.com/api-evangelist/nycu/refs/heads/main/apis.yml>
-- Run with Naftiko: <https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=nycu-api-evangelist&utm_content=repo>
+**Areas:** Education · Higher Education · University · Taiwan · Identity · Authentication · SSO · Research Data · Institutional Repository · Library · Metadata · OAI-PMH
 
-## Type
+## National Yang Ming Chiao Tung University on APIs.io
 
-- **Type:** Index (`x-type: university`, `x-category: Public Research University`)
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for National Yang Ming Chiao Tung University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/nycu/](https://apis.io/providers/nycu/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (9)
 
-Education, Higher Education, University, Taiwan, Identity, Authentication, Single Sign-On, Research Data, Institutional Repository, Library, Metadata
+- [NYCU Dataverse OAI-PMH Endpoint](https://apis.io/apis/nycu/dataverse-oai-pmh/) — Anonymous OAI-PMH 2.0 metadata-harvesting endpoint over the NYCU Dataverse research-data repository ("NYCU Dataverse Dataverse OAI Archive"). Verified with…
+- [NYCU Institutional Repository OAI-PMH Endpoint](https://apis.io/apis/nycu/ir-oai-pmh/) — Anonymous OAI-PMH 2.0 harvesting endpoint over the NYCU institutional repository (國立陽明交通大學機構典藏), running back to 2014. Verified with verb=Identify on…
+- [NYCU Dataverse (Dataverse Project deployment)](https://apis.io/apis/nycu/dataverse/) — NYCU Dataverse, the university library's research-data repository — a self-hosted deployment of Dataverse Project v5.10.1 holding 290 published datasets…
+- [NYCU Institutional Repository (DSpace deployment)](https://apis.io/apis/nycu/institutional-repository/) — 國立陽明交通大學機構典藏 — the NYCU institutional repository, a self-hosted DSpace 11 deployment with content back to 2014. Its DSpace REST API at /server/api answers…
+- [NYCU Library Discovery (Ex Libris Primo tenancy)](https://apis.io/apis/nycu/primo/) — NYCU's library discovery layer, an Ex Libris Primo tenancy. Recorded as a real institutional relationship. No Ex Libris contract is saved under this…
+- [DataCite Membership — NYCU Research Data Service](https://apis.io/apis/nycu/datacite/) — NYCU is a DataCite direct member in its own name — provider gtfe — and operates the DataCite repository client gtfe.kagikv, "NYCU Research Data Service",…
+- [ROR Registration](https://apis.io/apis/nycu/ror/) — NYCU's entry in the Research Organization Registry, ROR ID 00se2k293 — the canonical machine-readable identifier for the institution as an organization, and…
+- [National Yang Ming Chiao Tung University Profile API](https://apis.io/apis/nycu/nycu-profile-api/) — Consented NYCU user identity attributes.
+- [National Yang Ming Chiao Tung University O Auth API](https://apis.io/apis/nycu/nycu-oauth-api/) — OAuth 2.0 authorization-code endpoints.
 
-## Who operates what
+### Published properties
 
-A university is a federation of buyers, not a producer, so every surface below carries an
-`x-operator` saying who runs the thing it describes — which is rarely the same answer as who the
-data belongs to.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Institution-operated
+#### JSON Schema (4)
 
-- **NYCU OAuth API** — the university's own OAuth 2.0 (RFC 6749) authorization server, run by the
-  Information Technology Service Center. Six documented endpoints; the `profile` scope is open to
-  registered developers, `name` and `status` require institutional approval. This is the one
-  contract in this repo NYCU actually engineered. Docs: <https://id.nycu.edu.tw/docs/> · Register:
-  <https://id.nycu.edu.tw/apply/app> · Terms: <https://id.nycu.edu.tw/policy/> · OpenAPI:
-  [openapi/nycu-oauth-api-openapi.yml](openapi/nycu-oauth-api-openapi.yml) (derived from NYCU's own
-  documentation — NYCU publishes no machine-readable description and no discovery document).
-- **NYCU Dataverse OAI-PMH endpoint** — `https://dataverse.lib.nycu.edu.tw/oai`, verified with
-  `verb=Identify`.
-- **NYCU institutional repository OAI-PMH endpoint** — `https://ir.lib.nycu.edu.tw/server/oai/request`,
-  content back to 2014, verified with `verb=Identify`.
+The data models the API reads and writes.
 
-### Tenant relationships (real institutional facts; the contract is not NYCU's)
+- [Moved to /providers/nycu/](https://apis.io/schemas/nycu/nycu-dataset/)
+- [NYCU OAuth Profile](https://apis.io/schemas/nycu/nycu-oauth-profile/)
+- [NYCU OAuth Token Response](https://apis.io/schemas/nycu/nycu-oauth-token/)
+- [Moved to /providers/nycu/](https://apis.io/schemas/nycu/nycu-search-result/)
 
-- **NYCU Dataverse** — a self-hosted Dataverse Project v5.10.1 deployment, 290 datasets on DOI
-  prefix 10.57770. The REST contract is the Dataverse Project's.
-- **NYCU institutional repository (機構典藏)** — a self-hosted DSpace 11 deployment. The REST
-  contract is DSpace's.
-- **NYCU library discovery** — an Ex Libris Primo tenancy, view code `886UST_NYCU`.
+#### JSON Structure (2)
 
-### Registry memberships
+Data models expressed in JSON Structure.
 
-- **DataCite** — NYCU is a direct member in its own name (provider `gtfe`) and operates the
-  repository client `gtfe.kagikv`, "NYCU Research Data Service", prefix 10.57770.
-- **ROR** — <https://ror.org/00se2k293>.
+- [Moved to /providers/nycu/](https://apis.io/json-structure/nycu/nycu-dataset-structure/)
+- [Moved to /providers/nycu/](https://apis.io/json-structure/nycu/nycu-search-result-structure/)
 
-## Artifacts
+#### JSON-LD (1)
 
-- OpenAPI: [openapi/nycu-oauth-api-openapi.yml](openapi/nycu-oauth-api-openapi.yml) · pristine copy in [openapi/_original/](openapi/_original/)
-- Authentication: [authentication/nycu-authentication.yml](authentication/nycu-authentication.yml)
-- Scopes: [scopes/nycu-scopes.yml](scopes/nycu-scopes.yml)
-- Errors: [errors/nycu-errors.yml](errors/nycu-errors.yml)
-- Lifecycle: [lifecycle/nycu-lifecycle.yml](lifecycle/nycu-lifecycle.yml)
-- Conformance: [conformance/nycu-conformance.yml](conformance/nycu-conformance.yml)
-- Rules: [rules/nycu-rules.yml](rules/nycu-rules.yml)
-- JSON Schema: [json-schema/](json-schema/) · Examples: [examples/](examples/)
-- Plans & Pricing: [plans/nycu-plans-pricing.yml](plans/nycu-plans-pricing.yml)
-- Rate Limits: [rate-limits/nycu-rate-limits.yml](rate-limits/nycu-rate-limits.yml)
-- FinOps: [finops/nycu-finops.yml](finops/nycu-finops.yml)
-- Provenance manifest: [provenance.yml](provenance.yml)
+Linked-data contexts for the provider's vocabulary.
 
-## Timestamps
+- [Moved to /providers/nycu/](https://apis.io/jsonld/nycu/nycu-context/)
 
-- Created: 2026-06-03
-- Modified: 2026-09-01
+#### Vocabulary (1)
 
-## Common Properties
+The provider's domain terms, defined.
 
-- Website: <https://www.nycu.edu.tw/nycu/en/index>
-- Developer Portal: <https://id.nycu.edu.tw/docs/>
-- GitHub: <https://github.com/NYCU-OAuth> · Support: <https://github.com/NYCU-OAuth/issue-report>
-- AI policy: NYCU's generative-AI statement and guidelines, Office of Academic Ethics and Research Integrity
-- LinkedIn: <https://www.linkedin.com/school/nycu/>
-- Review: [review.yml](review.yml)
+- [NYCU Dataverse API Vocabulary](https://apis.io/vocabularies/nycu/nycu-vocabulary/)
 
-## Correction, 2026-09-01
+#### Examples (4)
 
-This profile previously held **23 OpenAPIs** attributed to NYCU. They were per-tag splits of **one
-document** — the Dataverse Project v5.10.1 machine-generated description captured from
-`dataverse.lib.nycu.edu.tw/openapi` — and they credited the Dataverse Project's engineering to the
-university. All 23, the pristine original, 47 derived collections and every derived schema,
-structure, example, ruleset, vocabulary, JSON-LD context, capability map and agentic-access file
-were removed. The repository, the DSpace deployment and the Primo tenancy are kept as **tenant
-relationships**, and the DataCite and ROR registrations as **registry memberships**, because those
-are real facts about the institution even where the contract is not theirs. The apis.yml entries
-also pointed all 23 Dataverse specs at `https://id.nycu.edu.tw` — the SSO host, not the repository
-host — which was a second, separate defect.
+Example requests and responses.
 
-**This correction lowers NYCU's score, and that is the pipeline working.** What remains is smaller
-and true.
+- [Moved to /providers/nycu/](https://apis.io/examples/nycu/nycu-info-version-example/)
+- [Nycu Oauth Profile Example](https://apis.io/examples/nycu/nycu-oauth-profile-example/)
+- [Nycu Oauth Token Example](https://apis.io/examples/nycu/nycu-oauth-token-example/)
+- [Moved to /providers/nycu/](https://apis.io/examples/nycu/nycu-search-example/)
 
-## Notes
+#### Collections (23)
 
-Hunted and not found on 2026-09-01: a developer portal (`developer.nycu.edu.tw`, `api.nycu.edu.tw` —
-no DNS), an open-data portal (`data.nycu.edu.tw`, `opendata.nycu.edu.tw` — no DNS), a course or
-timetable API (`timetable.nycu.edu.tw` and `course.nycu.edu.tw` are human web applications, the
-latter behind reCAPTCHA and Big5-encoded), a Shibboleth or SAML IdP (`idp.`/`sso.`/`shibboleth.nycu.edu.tw`
-— no DNS; `id.nycu.edu.tw/saml/metadata` 404), an OAuth or OpenID Connect discovery document (both
-well-known paths 404), a Crossref membership (0 results), and any ORCID integration. No official
-institution-wide GitHub organization exists — only research-lab orgs — but `github.com/NYCU-OAuth`
-is the OAuth service's own org and is listed. Searched in Traditional Chinese as well as English;
-the OAuth documentation, the terms of service and the university's generative-AI guidelines are all
-Chinese-first surfaces. The LinkedIn page returns 999 and DataCite Commons returns 429 to automated
-clients; both are bot challenges, not dead links. No endpoints were fabricated.
+Postman and Open Collection request collections.
 
-## Maintainers
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-access-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-admin-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-batch-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-builtin-users-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-datasets-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-datatags-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-dataverses-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-edit-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-files-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-harvest-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-info-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-ingest-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-licenses-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-mail-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-meta-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-metadatablocks-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-mydata-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-notifications-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-pids-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-roles-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-search-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-users-api/)
+- [Moved to /providers/nycu/](https://apis.io/collections/nycu/open-nycu-workflows-api/)
 
-- Kin Lane — <kin@apievangelist.com>
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Moved to /providers/nycu/](https://apis.io/rules/nycu/nycu-jsonschema-spectral-rules/)
+- [National Yang Ming Chiao Tung University API Rules](https://apis.io/rules/nycu/nycu-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Nycu Authentication](https://apis.io/security/nycu/nycu-authentication/)
+- [Nycu Domain Security](https://apis.io/security/nycu/nycu-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Nycu Scopes](https://apis.io/scopes/nycu/nycu-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Nycu Plans Pricing](https://apis.io/plans/nycu/nycu-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Nycu Rate Limits](https://apis.io/rate-limits/nycu/nycu-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Nycu Finops](https://apis.io/finops/nycu/nycu-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.nycu.edu.tw/nycu/ch/index)
+- [Documentation](https://id.nycu.edu.tw/docs/)
+- [API reference](https://id.nycu.edu.tw/docs/)
+- [Support](https://github.com/NYCU-OAuth/issue-report)
+- [Terms of service](https://id.nycu.edu.tw/policy/)
+- [GitHub](https://github.com/NYCU-OAuth)
+
+## API Evangelist rating
+
+**Kin Score 28.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 19.1 |
+| Contract governance | 7.6 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 42.9 |
+| Access clarity | 28.9 |
+
+**Agent readiness 23.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 30.4** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/nycu/](https://apis.io/providers/nycu/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for National Yang Ming Chiao Tung University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/nycu/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
